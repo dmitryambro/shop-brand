@@ -1,0 +1,201 @@
+@import 'state/vars'
+@import 'state/class'
+@import 'state/mixins'
+
+.subscribe
+  background: #e8e8e8 url(../img/subs.jpg) no-repeat center
+  width: 100%
+  height: 438px
+  margin: 97px 0 0 0
+  position: relative
+  &:before
+    content: ""
+    background-color: rgba(242, 242, 242, 0.5)
+    width: 100%
+    height: 100%
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1
+  &__center
+    height: 100%
+    position: relative
+    display: flex
+    z-index: 2
+  &__left,
+  &__right
+    width: 50%
+    height: 438px
+  &__left
+    border-right: 1px solid #e3e3e3
+    justify-content: flex-start
+  &__right
+    padding: 148px 0 0 92px
+    width: 478px
+    text-align: center
+  &__title
+    text-transform: uppercase
+    color: rgba(34, 34, 36, 1)
+    font-size: 24px
+    font-weight: 400
+    line-height: 24px
+  &__info
+    text-transform: uppercase
+    color: rgba(34, 34, 36, 1)
+    font-size: 14px
+    font-weight: 400
+    line-height: 14px
+    padding: 10px 0 0 0
+  &__form
+    margin: 35px 0 0 0
+    width: 386px
+    height: 46px
+    display: flex
+  &__input
+    background: #e1e1e1
+    border-radius: 46px 0 0 46px
+    border: 0
+    outline: none
+    color: rgba(34, 34, 36, 0.67)
+    font-size: 14px
+    font-weight: 400
+    line-height: 46px
+    padding: 0 28px
+    width: 282px
+  &__button
+    background-color: #f16d7f
+    width: 104px
+    height: 46px
+    border-radius: 0 46px 46px 0
+    border: 0
+    cursor: pointer
+    outline: none
+    color: #ffffff
+    font-size: 14px
+    font-weight: 400
+    line-height: 46px
+    text-align: center
+
+.opinion
+  margin: 111px 0 0 0
+  display: flex
+  &__img
+    width: 83px
+    height: 83px
+  &__content
+    margin: 6px 0 0 28px
+    width: 386px
+    color: rgba(34, 34, 36, 1)
+    font-size: 16px
+    font-weight: 500
+    font-style: italic
+    line-height: 26px
+    text-align: justify
+    padding: 0 0 19px 0
+  &__buttons
+    margin: 41px 0 0 100px
+    display: flex
+  &__button
+    background-color: #d6d6d6
+    width: 38px
+    height: 4px
+    margin: 0 0 0 13px
+    cursor: pointer
+    &:hover,
+    &_select
+      background-color: #f16d7f
+
+.information
+  &__center
+    margin-top: 109px
+    display: flex
+    justify-content: space-between
+  &__text
+    width: 427px
+    color: #898989
+    font-size: 14px
+    font-weight: 300
+    line-height: 24px
+    text-align: left
+    padding: 29px 0 0 0
+  &__title
+    color:  #f16d7f
+    font-size: 18px
+    font-weight: 700
+    line-height: 26px
+    text-transform: uppercase
+    padding: 0 0 20px 0
+  &__list
+    list-style: none
+  &__link
+    color:  #898989
+    font-size: 16px
+    font-weight: 400
+    line-height: 40px
+    text-decoration: none
+    transition: color 0.3s
+    &:hover,
+    &_select
+      color:  #f16d7f
+
+.footer
+  //grid-row-start: 2
+  //grid-row-end: 3
+  background-color:  #e6e6e6
+  width: 100%
+  height: 79px
+  margin: 89px 0 0 0
+  &__center
+    display: flex
+    justify-content: space-between
+  &__copyrights
+    color:  #7a7a7a
+    font-size: 16px
+    font-weight: 400
+    line-height: 79px
+  &__socials
+    display: flex
+    padding: 24px 0 0 0
+  &__link
+    display: block
+    background-color:  #ffffff
+    width: 32px
+    height: 32px
+    margin: 0 0 0 8px
+    cursor: pointer
+    font-size: 16px
+    font-weight: 400
+    line-height: 32px
+    text-align: center
+    text-decoration: none
+    transition: background-color 1s, color 1s
+    &:after
+      color: #b2b2b2
+    &:hover
+      background-color: #f16d7f
+      &:after
+        color: #f7f7f8
+    &:active
+      background-color: #eeeeee
+      &:after
+        color: #b2b2b2
+    &_fb
+      &:after
+        content: $ico-soc-fb
+        font-family: $ico-font-family
+    &_tw
+      &:after
+        content: $ico-soc-tw
+        font-family: $ico-font-family
+    &_in
+      &:after
+        content: $ico-soc-in
+        font-family: $ico-font-family
+    &_pr
+      &:after
+        content: $ico-soc-pr
+        font-family: $ico-font-family
+    &_gp
+      &:after
+        content: $ico-soc-gp
+        font-family: $ico-font-family

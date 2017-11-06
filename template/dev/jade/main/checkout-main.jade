@@ -1,0 +1,59 @@
+.rose-panel
+    .rose-panel__center.center
+        .rose-panel__left
+            .rose-panel__title new arrivals
+        .rose-panel__right
+            a.rose-panel__crumb(href="#") home
+            a.rose-panel__crumb(href="#") men
+            a.rose-panel__crumb.rose-panel__crumb_active(href="#") new arrivals
+
+.checkout
+    .checkout__center.center
+        ul.checkout__ulist
+            li.checkout__list(data-list-id="01") shipping address
+                .checkout__container
+                    form.checkout-form
+                        .checkout-form__title check as a guest or register
+                        .checkout-form__text Register with us for future convenience
+                        .checkout-form__line-br
+                        .checkout-form__radio-container
+                            input(type="radio" id="radio-1" name="radio").checkout-form__radio-input
+                            label(for="radio-1").checkout-form__radio-label
+                                .checkout-form__radio-figure
+                                |checkout as guest
+                        .checkout-form__radio-container
+                            input(type="radio" id="radio-2" name="radio").checkout-form__radio-input
+                            label(for="radio-2").checkout-form__radio-label
+                                .checkout-form__radio-figure
+                                |register
+                        .checkout-form__line-br
+                        .checkout-form__line-br
+                        .checkout-form__title register and save time!
+                        .checkout-form__text Register with us for future convenience
+                        .checkout-form__line-br
+                        .checkout-form__text.checkout-form__text_angle-double-right Fast and easy checkout
+                        .checkout-form__text.checkout-form__text_angle-double-right Easy access to your order history and status
+                        button.checkout-form__button continue
+                    form.checkout-form
+                        .checkout-form__title already registed
+                        .checkout-form__text Please log in below
+                        .checkout-form__line-br
+                        .checkout-form__input-text-container
+                            label(for="text-1").checkout-form__input-text-label.checkout-form__input-text-label_required
+                                |email address
+                            input#text-1.checkout-form__input-text-input
+                        .checkout-form__input-text-container
+                            label(for="text-2").checkout-form__input-text-label.checkout-form__input-text-label_required
+                                |password
+                            input#text-2.checkout-form__input-text-input
+                        .checkout-form__title.checkout-form__title_red *Required Fields
+                        button.checkout-form__button log in
+                        a(href="#").checkout-form__link Forgot Password?
+
+
+
+            li.checkout__list(data-list-id="02") billing information
+            li.checkout__list(data-list-id="03") shipping information
+            li.checkout__list(data-list-id="04") shipping method
+            li.checkout__list(data-list-id="05") payment method
+            li.checkout__list(data-list-id="06") order review

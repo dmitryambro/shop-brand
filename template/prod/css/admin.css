@@ -1,0 +1,10 @@
+.admin-product__p {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.categories-list__category {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 0 10px 0;
+  margin: 10px 0 0 0; }

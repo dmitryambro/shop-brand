@@ -1,0 +1,1042 @@
+@import 'state/vars'
+@import 'state/class'
+@import 'state/mixins'
+@import 'state/animate'
+
+.big-slider
+  width: 100%
+  height: 604px
+  background-color: #e8e8e8
+  &__img
+    width: 100%
+    height: 604px
+    background: url(../img/chuvak.png) center
+  &__losung
+    display: block
+    border-left: 12px solid #f16d7f
+    position: relative
+    top: 225px
+  &__big-text
+    color: #222222
+    font-size: 60px
+    line-height: 45px
+    font-weight: 900
+    text-transform: uppercase
+    padding: 0 0 6px 12px
+  &__text
+    color: #222222
+    font-size: 40px
+    line-height: 32px
+    font-weight: 900
+    text-transform: uppercase
+    padding: 6px 0 0 12px
+    &_rose
+      color: #f16d7f
+      display: inline-block
+
+.sales
+  &__center
+    display: flex
+    flex-grow: 2
+    margin-top: 98px
+  &__left,
+  &__right
+    width: 50%
+  &__left
+    padding: 0 10px 0 0
+  &__right
+    padding: 0 0 0 10px
+  &__item
+    width: 560px
+    height: 261px
+    position: relative
+    &_big
+      height: 542px
+    &:first-child
+      margin: 0 0 20px 0
+  &__img
+    width: 100%
+    height: 100%
+  &__info
+    position: absolute
+    background: #fff
+    padding: 16px 20px
+    top: 26px
+    left: 0
+  &__text
+    color: #222222
+    font-size: 18px
+    font-weight: 900
+    text-transform: uppercase
+  &__big-text
+    color: #f16d7f
+    font-size: 30px
+    font-weight: 900
+    text-transform: uppercase
+
+.products
+  &__header
+    margin: 100px 0 0 0
+  &__title
+    margin-top: 100px
+    text-transform: uppercase
+    text-align: center
+    color:  #4d4d4d
+    font-size: 24px
+    font-weight: 900
+    line-height: 20px
+  &__big-text
+    color: #222222
+    font-size: 30px
+    font-weight: 700
+    line-height: 30px
+    text-align: center
+    margin: 0 0 16px 0
+  &__filter
+    display: flex
+    height: 80px
+    padding: 10px 0
+    &_container
+      margin: 0 0 0 20px
+      display: flex
+      flex-direction: column
+      position: relative
+    &_label
+      text-transform: uppercase
+      color:  #4d4d4d
+      font-size: 14px
+      line-height: 17px
+      font-weight: 500
+      margin: 0 0 4px 0
+    &_text
+      text-transform: uppercase
+      text-align: center
+      color:  #4d4d4d
+      font-size: 24px
+      line-height: 40px
+      font-weight: 900
+      margin: 0 0 0 20px
+    &_select
+      width: 180px
+      height: 38px
+      line-height: 34px
+      color: #4d4d4d
+      border: 1px solid #eaeaea
+      padding: 0 15px
+      word-break: break-all
+      overflow: hidden
+      cursor: pointer
+    &_input
+      width: 260px
+      height: 38px
+      line-height: 34px
+      color: #4d4d4d
+      border: 1px solid #eaeaea
+      padding: 0 15px
+      word-break: break-all
+      overflow: hidden
+    &_button
+      text-transform: uppercase
+      margin: 20px 0 0 20px
+      background-color: #f16d7f
+      padding: 0 24px
+      text-decoration: none !important
+      color: #fff
+      font-size: 17px
+      font-weight: 700
+      cursor: pointer
+      transition: background-color 0.5s
+      border: 1px solid #fff
+      &:hover
+        background-color: #eaeaea
+        color: #4a494a
+      &:active
+        animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+        -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+  &__filter-form
+    display: none
+    position: absolute
+    top: 56px
+    left: 10px
+    width: 180px+3px
+    background: #ffffff
+    z-index: 99000
+    padding: 12px
+    box-shadow: 0 0 3px #e6e6e6
+    border: 0 solid #e6e6e6
+  &__filter-form-header
+    color: #222222
+    font-size: 14px
+    font-weight: 400
+    line-height: 16px
+    text-transform: uppercase
+    border-bottom: 1px solid #eaeaea
+    padding: 0 0 4px 0
+    margin: 0 0 4px 0
+  &__filter-form
+    &:before
+      content: ""
+      position: absolute
+      width: 14px
+      height: 14px
+      background: #ffffff
+      box-shadow: 0 0 3px #e6e6e6
+      top: -7px
+      left: 20%
+      transform: translateX(-50%) rotate(45deg)
+      z-index: 2
+      border: 1px solid #e6e6e6
+    &:after
+      content: ""
+      z-index: 3
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 100%
+      height: 11px
+      background: #ffffff
+  &__filter_select:hover + &__filter-form,
+  &__filter-form:hover
+    display: block
+  &__text
+    color: #9f9f9f
+    font-size: 14px
+    font-weight: 400
+    line-height: 16px
+    text-align: center
+  &__container
+    display: flex
+    flex-wrap: wrap
+    padding: 60px 0
+  &__footer
+    text-align: center
+  &__button
+    background-color: #f16d7f
+    display: inline-block
+    padding: 18px 24px
+    text-decoration: none !important
+    color: #fff
+    font-size: 16px
+    font-weight: 700
+    line-height: 16px
+    cursor: pointer
+    transition: background-color 0.5s
+    border: 1px solid #fff
+    &:hover
+      background-color: #eaeaea
+      color: #4a494a
+    &:after
+      content: $ico-arrow-right
+      font-family: $ico-font-family
+      font-size: 15px
+      font-weight: 400
+      padding: 0 0 0 9px
+    &:active
+      animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+      -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+    &_page
+      padding: 10px 14px
+      &:after
+        content: ""
+        padding: 0
+
+.features
+  &__center
+    background-color: #222224
+    height: 529px
+    margin-top: 113px
+    display: flex
+    flex-grow: 2
+  &__image
+    width: 767px
+    height: 529px
+    background: url(../img/sale.jpg) no-repeat
+  &__big-text
+    color: #ffffff
+    font-size: 54px
+    line-height: 54px
+    font-weight: 700
+    padding: 146px 0 0 39px
+    text-transform: uppercase
+    &_rose
+      color: #f16d7f
+  &__text
+    color: #ffffff
+    font-size: 32px
+    line-height: 32px
+    font-weight: 700
+    padding: 0 0 0 39px
+    text-transform: uppercase
+  &__content
+    width: 373px
+    height: 529px
+    padding: 48px 0 0 36px
+
+.feature-item
+  display: flex
+  margin: 0 0 37px 0
+  &__icon
+    background: no-repeat center
+    width: 47px
+    height: 47px
+    margin: 0 33px 0 0
+    &_ico-1
+      background-image: url(../img/feature_ico_1.png)
+      background-size: 45px 32px
+    &_ico-2
+      background-image: url(../img/feature_ico_2.png)
+      background-size: 40px 40px
+    &_ico-3
+      background-image: url(../img/feature_ico_3.png)
+      background-size: 47px 35px
+  &__container
+    width: 219px
+  &__big-text
+    color: #fbfbfb
+    font-size: 20px
+    font-weight: 700
+    text-align: left
+    padding: 8px 0 0 0
+  &__text
+    padding: 17px 0 0 0
+    color: #fbfbfb
+    font-size: 14px
+    font-weight: 300
+    line-height: 24px
+    text-align: justify
+
+.product
+  width: 261px
+  height: 364px
+  margin: 0 32px 40px 0
+  cursor: pointer
+  position: relative
+  box-shadow: 0 0 0 #fff
+  transition: box-shadow 1s
+  &:nth-child(4n+0)
+    margin-right: 0
+  &:nth-last-child(-n+4)
+    margin-bottom: 0
+  &__img
+    width: 261px
+    height: 279px
+    min-width: 261px
+    min-height: 279px
+    max-width: 261px
+    max-height: 279px
+  &__title
+    color: #222222
+    font-size: 13px
+    line-height: 13px
+    font-weight: 400
+    text-transform: uppercase
+    padding: 20px 14px 0 14px
+  &__price
+    color: #f16d7f
+    font-size: 16px
+    line-height: 16px
+    font-weight: 700
+    padding: 17px 14px 0 14px
+  &:hover
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.16)
+    &:before
+      content: ""
+      animation: scale-up-center 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both
+      background-color: rgba(58, 56, 56, 0.83)
+      position: absolute
+      width: 261px
+      height: 279px
+      left: 0
+      top: 0
+      z-index: 1
+    &:after
+      content: "Add to Cart"
+      animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both
+      width: 123px
+      height: 39px
+      position: absolute
+      left: 70px
+      top: 98px
+      border: 1px solid #fff
+      z-index: 2
+      color: #ffffff
+      font-size: 13px
+      font-weight: 700
+      text-align: center
+      line-height: 39px
+      background-size: 23px 22px
+      background: url(../img/shop_cart_2.png) no-repeat 10px center
+      box-sizing: border-box
+      padding: 0 0 0 30px
+  &:active
+    &:after
+      box-shadow: 0 0 0 #fff
+
+.rose-panel
+  height: 148px
+  background-color: #f8f3f4
+  &__center
+    display: flex
+    justify-content: space-between
+    padding-top: 62px
+  &__left
+    justify-content: flex-start
+  &__title
+    text-transform: uppercase
+    color: #f16d7f
+    font-size: 24px
+    line-height: 24px
+    font-weight: 900
+    padding-left: 7px
+  &__right
+    justify-content: flex-end
+  &__crumb
+    text-transform: uppercase
+    color: #636363
+    font-size: 14px
+    font-weight: 300
+    line-height: 20px
+    text-decoration: none
+    transition: color 0.5s
+    &:after
+      content: "/"
+      padding: 0 2px
+      color: #636363
+    &:last-child:after
+      content: ""
+      padding: 0
+    &:hover
+      color: #f16d7f
+    &_active
+      color: #f16d7f
+      font-weight: 700
+
+.shop-cart-list
+  &__center
+    margin-top: 69px
+    padding: 0 2px 0 9px
+  &__row
+    display: table
+    //justify-content: space-between
+    border-bottom: 1px solid #eaeaea
+    padding: 20px 0
+    &_content
+      padding: 25px 0
+      &:nth-child(2)
+        padding: 20px 0 25px 0
+  &__cell
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+    &:nth-child(1)
+      width: 460px
+      display: flex
+    &:nth-child(2)
+      width: 178px
+    &:nth-child(3)
+      width: 154px
+    &:nth-child(4)
+      width: 130px
+    &:nth-child(5)
+      width: 163px
+    &:nth-child(6)
+      width: 54px
+  &__header-cell
+    text-transform: uppercase
+    color: #222222
+    font-size: 13px
+    line-height: 13px
+    font-weight: 700
+    letter-spacing: 0
+    &:first-child
+      text-align: left
+    &:last-child
+      text-align: right
+  &__img
+    width: 100px
+    height: 117px
+  &__details
+    padding-left: 21px
+    text-align: left
+    &_title
+      text-transform: uppercase
+      padding-top: 14px
+      padding-bottom: 32px
+      color: #222222
+      font-size: 13px
+      line-height: 13px
+      font-weight: 400
+      letter-spacing: 0.3px
+    &_color,
+    &_size
+      color: #6f6e6e
+      font-size: 13px
+      font-weight: 300
+      line-height: 20px
+      &:before
+        color: #575757
+        font-weight: 400
+        padding-right: 7px
+    &_color
+      &:before
+        content: "Color:"
+    &_size
+      &:before
+        content: "Size:"
+  &__content-cell
+    text-transform: uppercase
+    color: #656565
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+  &__number
+    width: 54px
+    height: 30px
+    border: 1px solid #eaeaea
+    color: #656565
+    font-size: 13px
+    font-weight: 400
+    line-height: 20px
+    text-align: center
+    outline: none
+    padding: 1px 0 0 6px
+  &__remove
+    width: 14px
+    height: 14px
+    border-radius: 50%
+    background: #c0c0c0
+    cursor: pointer
+    display: inline-block
+    color: #ffffff
+    line-height: 14px
+    font-size: 10px
+    font-weight: 400
+    &:after
+      content: $ico-remove
+      font-family: $ico-font-family
+      padding-left: 1px
+
+.shop-cart-footer-buttons
+  &__center
+    margin-top: 44px
+    display: flex
+  &__left
+    justify-content: flex-start
+    width: 50%
+  &__right
+    justify-content: flex-end
+    width: 50%
+    text-align: right
+  &__button
+    border: 1px solid #eaeaea
+    height: 50px
+    background-color: #ffffff
+    color: #4a4a4a
+    font-size: 14px
+    line-height: 14px
+    font-weight: 700
+    padding: 20px 38px 18px 39px
+    cursor: pointer
+    text-transform: uppercase
+
+.shop-delivery
+  &__center
+    margin-top: 63px
+    display: flex
+    justify-content: space-between
+  &__title
+    color: #222222
+    font-size: 16px
+    font-weight: 700
+    line-height: 16px
+    text-transform: uppercase
+    margin-bottom: 2px
+  &__info
+    color: #000000
+    font-size: 14px
+    font-weight: 300
+    margin-top: 26px
+    margin-bottom: 4px
+  &__select-container
+    width: 355px
+    height: 45px
+    border: 1px solid #eaeaea
+    margin-top: 20px
+    &_select
+      border: 0
+      outline: none
+      font-size: 13px
+      font-weight: 300
+      color: #b1b1b1
+      padding: 13px 18px
+      width: 353px
+      cursor: pointer
+  &__input
+    width: 355px
+    height: 45px
+    border: 1px solid #eaeaea
+    margin-top: 20px
+    padding: 16px 18px
+    font-size: 13px
+    font-weight: 300
+    color: #b1b1b1
+    &::placeholder
+      color: #b1b1b1
+  &__button
+    border: 1px solid #eaeaea
+    color: #4a4a4a
+    font-size: 11px
+    font-weight: 700
+    padding: 12px 14px 12px 15px
+    background-color: #fff
+    margin-top: 23px
+    cursor: pointer
+    text-transform: uppercase
+
+.address-form,
+.coupon-form
+  width: 355px
+  margin-right: 35px
+
+.shop-cart-total
+  width: 360px
+  height: 214px
+  background-color: #f5f3f3
+  padding: 40px 43px 42px 44px
+  &__sub-total
+    display: flex
+    justify-content: flex-end
+    color: #4a4a4a
+    font-size: 11px
+    font-weight: 400
+    line-height: 11px
+    text-transform: uppercase
+    &_price
+      padding-left: 10px
+  &__total
+    display: flex
+    justify-content: flex-end
+    padding: 14px 0 22px 0
+    color: #222222
+    font-size: 16px
+    font-weight: 700
+    text-transform: uppercase
+    border-bottom: 1px solid #e2e2e2
+    &_price
+      padding-left: 10px
+      color: #f16d7f
+  &__button
+    text-transform: uppercase
+    cursor: pointer
+    background-color: #f16d7f
+    height: 50px
+    color: #ffffff
+    border: 0
+    font-size: 16px
+    font-weight: 700
+    padding: 19px
+    margin-top: 17px
+    width: 100%
+    display: block
+    text-align: center
+
+.checkout
+  &__center
+    margin-top: 56px
+  &__ulist
+    list-style: none
+  &__list
+    color: #222222
+    font-size: 16px
+    line-height: 16px
+    font-weight: 700
+    text-transform: uppercase
+    padding: 33px 0
+    border-bottom: 1px solid #e8e8e8
+    cursor: pointer
+    &:before
+      content: attr(data-list-id) "."
+      padding-right: 6px
+  &__container
+    display: flex
+    justify-content: flex-start
+    cursor: auto
+
+.form
+  &__radio-container
+    display: flex
+    padding: 8px 0
+  &__radio-input
+    display: none
+  &__radio-figure
+    position: relative
+    width: 14px
+    height: 14px
+    border: 2px solid #555555
+    border-radius: 50%
+    margin-right: 14px
+    display: inline-flex
+    &:before
+      content: ""
+      position: absolute
+      width: 6px
+      height: 6px
+      border-radius: 50%
+      left: 0
+      top: 0
+      transform: translate(2px, 2px)
+      background-color: #ffffff
+      transition: background-color 1.2s
+  &__radio-label
+    cursor: pointer
+    color: #222222
+    font-size: 12px
+    font-weight: 400
+    line-height: 14px
+  &__radio-input:checked + &__radio-label > &__radio-figure
+    &:before
+      background-color: #000
+  &__checkbox-container
+    display: flex
+    padding: 8px 0
+  &__checkbox-input
+    display: none
+  &__checkbox-figure
+    position: relative
+    width: 14px
+    height: 14px
+    border: 2px solid #555555
+    border-radius: 0
+    margin-right: 14px
+    display: inline-flex
+    &:before
+      content: ""
+      position: absolute
+      width: 6px
+      height: 6px
+      border-radius: 0
+      left: 0
+      top: 0
+      transform: translate(2px, 2px)
+      background-color: #ffffff
+      transition: background-color 1.2s
+  &__checkbox-label
+    cursor: pointer
+    color: #222222
+    font-size: 12px
+    font-weight: 400
+    line-height: 14px
+  &__checkbox-input:checked + &__checkbox-label > &__checkbox-figure
+    &:before
+      background-color: #000
+
+.checkout-form
+  width: 550px
+  padding: 35px 39px
+  &__line-br
+    height: 18px
+    width: 100%
+  &__title
+    color: #222222
+    font-size: 13px
+    font-weight: 400
+    line-height: 13px
+    margin-bottom: 15px
+    &_red
+      color: #ff0d0d
+      text-transform: none
+  &__text
+    text-transform: none
+    color: #b3b2b2
+    font-size: 13px
+    font-weight: 400
+    line-height: 13px
+    margin-bottom: 15px
+    &_angle-double-right
+      &:before
+        content: $ico-angle-double-right
+        font-family: $ico-font-family
+        padding-right: 4px
+  &__radio-container
+    display: flex
+    padding: 8px 0
+  &__radio-input
+    display: none
+  &__radio-figure
+    position: relative
+    width: 14px
+    height: 14px
+    border: 2px solid #555555
+    border-radius: 50%
+    margin-right: 14px
+    display: inline-flex
+    &:before
+      content: ""
+      position: absolute
+      width: 6px
+      height: 6px
+      border-radius: 50%
+      left: 0
+      top: 0
+      transform: translate(2px, 2px)
+      background-color: #ffffff
+      transition: background-color 1.2s
+  &__radio-label
+    cursor: pointer
+    color: #222222
+    font-size: 12px
+    font-weight: 400
+    line-height: 14px
+  &__radio-input:checked + &__radio-label > &__radio-figure
+    &:before
+      background-color: #000
+  &__input-text-label
+    cursor: pointer
+    color: #222222
+    font-size: 12px
+    font-weight: 400
+    display: block
+    line-height: 16px
+    &_required
+      &:after
+        content: "*"
+        color: #ff0d0d
+        font-size: 16px
+        font-weight: 400
+        padding-left: 2px
+  &__input-text-input
+    margin-top: 10px
+    margin-bottom: 16px
+    width: 390px
+    height: 45px
+    line-height: 45px
+    background: #ffffff
+    border: 1px solid #eaeaea
+    padding: 10px
+    transition: border-color 1.5s
+    &:focus
+      border-color: #ef5b70
+  &__button
+    width: 180px
+    height: 50px
+    background-color: #ffffff
+    border: 1px solid #eaeaea
+    margin-top: 32px
+    text-transform: uppercase
+    color: #4a4a4a
+    font-size: 14px
+    font-weight: 700
+    cursor: pointer
+    transition: border-color 0.7s, background-color 0.7s, color 0.7s
+    &:hover
+      background-color: #ef5b70
+      border-color: #ef5b70
+      color: #fff
+    &:active
+      background-color: #ffffff
+      color: #4a4a4a
+  &__link
+    color: #222222
+    font-size: 13px
+    font-weight: 400
+    line-height: 13px
+    text-decoration: none
+    margin-left: 32px
+    transition: color 0.5s
+    &:hover
+      color: #ef5b70
+
+.product-slider
+  height: 777px
+  border-top: 1px solid #eaeaea
+  border-bottom: 1px solid #eaeaea
+  background: #f7f7f7
+  position: relative
+  &__img
+    display: block
+    width: auto
+    height: 100%
+    margin: 0 auto
+  &__arrow
+    background-color: rgba(42, 42, 42, 0.15)
+    width: 47px
+    height: 47px
+    position: absolute
+    top: 365px
+    color: #ffffff
+    font-size: 24px
+    font-weight: 400
+    line-height: 45px
+    text-align: center
+    cursor: pointer
+    transition: background-color 0.5s
+    &:hover
+      background-color: #f16d7f
+    &:after
+      content: $ico-prod-arrow-left
+      font-family: $ico-font-family
+    &_right
+      right: 0
+      &:after
+        content: $ico-prod-arrow-right
+
+.product-info
+  &__center
+    position: relative
+    margin-top: -86px
+    background: #ffffff
+    border: 1px solid #eaeaea
+    text-align: center
+    padding: 73px 0 122px 0
+  &__title
+    text-transform: uppercase
+    color: #f16d7f
+    font-size: 14px
+    font-weight: 700
+    line-height: 14px
+    border-bottom: 1px solid #eaeaea
+    padding: 0 0 15px 0
+    display: inline-block
+    position: relative
+    &:after
+      content: " "
+      background-color: #ef5b70
+      width: 63px
+      height: 3px
+      position: absolute
+      bottom: -2px
+      left: 50%
+      transform: translateX(-50%)
+  &__title2
+    color: #4d4d4d
+    font-size: 18px
+    font-weight: 900
+    line-height: 18px
+    padding: 17px 0 0 0
+  &__text
+    width: 618px
+    margin: 67px auto 0 auto
+    color: #5e5e5e
+    font-size: 14px
+    font-weight: 300
+    line-height: 24px
+  &__options
+    display: flex
+    justify-content: center
+    width: 618px
+    margin: 0 auto
+    padding: 28px 0
+  &__option
+    text-transform: uppercase
+    padding: 0 22px 9px
+    display: inline-block
+    color:  #b9b9b9
+    font-size: 14px
+    font-weight: 700
+    line-height: 14px
+    &_black
+      display: inline-block
+      color: #2f2f2f
+  &__price
+    padding-bottom: 43px
+    color:  #ef5b70
+    font-size: 24px
+    font-weight: 700
+    line-height: 24px
+    border-bottom: 1px solid #eaeaea
+    width: 618px
+    margin: 0 auto
+  &__form
+    text-align: left
+    width: 538px
+    margin: 0 auto
+    display: flex
+    flex-wrap: wrap
+    padding-top: 63px
+  &__form-item
+    width: 144px
+    margin-right: 53px
+    &:nth-child(3n)
+      margin-right: 0
+  &__label
+    text-transform: uppercase
+    color: #2f2f2f
+    font-size: 14px
+    font-weight: 700
+    line-height: 14px
+    display: block
+  &__select1-container,
+  &__select2-container
+    display: block
+    border: 1px solid #eaeaea
+    background-color: #ffffff
+    width: 144px
+    height: 35px
+    position: relative
+    margin: 16px 0 0 0
+    padding: 6px 9px
+    &:after
+      content: "\f107"
+      font-family: $ico-font-family
+      position: absolute
+      right: 9px
+      top: 8px
+      color: #bcbcbc
+      font-size: 14px
+      line-height: 14px
+      font-weight: 400
+  &__select1,
+  &__select2
+    color: #bcbcbc
+    font-size: 13px
+    font-weight: 400
+    border: 0
+    width: 100%
+    outline: none
+    margin: 0
+    padding: 0
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    position: relative
+    z-index: 2
+    background: transparent
+    cursor: pointer
+  &__select2
+    text-transform: uppercase
+  &__input-number
+    border: 1px solid #eaeaea
+    background-color: #ffffff
+    width: 144px
+    height: 35px
+    position: relative
+    margin-top: 16px
+    padding: 9px
+    color: #bcbcbc
+    font-size: 13px
+    font-weight: 400
+    outline: none
+  &__button
+    display: block
+    width: 538px
+    margin: 28px auto 0
+    padding: 0
+    border: 1px solid #ef5b70
+    outline: none
+    background: #fff
+    height: 53px
+    line-height: 50px
+    color: #ef5b70
+    font-size: 16px
+    font-weight: 700
+    cursor: pointer
+  &__button-ico
+    background: url(../img/shop_cart_3.png) no-repeat left center
+    background-size: auto 100%
+    width: 41px
+    height: 24px
+    top: 6px
+    display: inline-block
+    position: relative
+    padding: 0 0 0 15px

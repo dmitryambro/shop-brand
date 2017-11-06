@@ -1,0 +1,63 @@
+.register-form {
+  width: 400px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column; }
+  .register-form__title {
+    text-transform: uppercase;
+    color: #f16d7f;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px;
+    border-bottom: 1px solid #eaeaea;
+    padding: 0 0 15px 0;
+    display: inline-block;
+    position: relative;
+    text-align: center; }
+    .register-form__title:after {
+      content: " ";
+      background-color: #ef5b70;
+      width: 63px;
+      height: 3px;
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%); }
+  .register-form__label {
+    padding: 20px 0 4px 4px;
+    display: block;
+    text-transform: uppercase;
+    color: #2f2f2f;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px; }
+  .register-form__input {
+    display: block;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 18px;
+    border: 1px solid #eaeaea; }
+  .register-form__button {
+    display: block;
+    width: 100%;
+    margin: 28px auto 0;
+    padding: 0;
+    border: 1px solid #ef5b70;
+    outline: none;
+    background: #fff;
+    height: 53px;
+    line-height: 50px;
+    color: #ef5b70;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer; }
+  .register-form__error {
+    border-color: red; }
+  .register-form__error-label {
+    padding: 4px 0 0 4px;
+    display: block;
+    text-transform: uppercase;
+    color: red;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 14px; }

@@ -1,0 +1,135 @@
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5); }
+  100% {
+    transform: scale(1); } }
+
+@keyframes shadow-inset-center {
+  0% {
+    border-color: #fff;
+    box-shadow: inset 0 0 0 0 transparent; }
+  100% {
+    border-color: #4a494a;
+    box-shadow: inset 0 0 14px 0 rgba(0, 0, 0, 0.1); } }
+
+@keyframes drop-down-menu {
+  0% {
+    height: 0; }
+  100% {
+    height: 320px; } }
+
+@keyframes rotate-scale-up {
+  0% {
+    transform: scale(1) rotateZ(0); }
+  50% {
+    transform: scale(1.4) rotateZ(180deg); }
+  100% {
+    transform: scale(1) rotateZ(360deg); } }
+
+.nav__ulist {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 206px 0 216px; }
+
+.nav__list {
+  list-style: none;
+  position: relative; }
+
+.nav__link {
+  color: #222222;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 15px 9px 16px 9px;
+  display: block;
+  border-color: #fff; }
+  .nav__link_active {
+    border-bottom: 3px solid #ef5b70; }
+
+.nav__list_drop:hover:before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  box-shadow: 0 0 3px #e6e6e6;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 2;
+  border: 1px solid #e6e6e6; }
+
+.nav__list_drop:hover:after {
+  content: "";
+  z-index: 3;
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 11px;
+  background: #ffffff; }
+
+.nav__list_drop:hover .nav__drop-conainer, .nav__drop-conainer:hover {
+  border-width: 1px;
+  animation: drop-down-menu 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both; }
+
+.nav__drop-conainer {
+  position: absolute;
+  left: -50px;
+  top: 48px;
+  width: auto;
+  height: 0;
+  background: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #e6e6e6;
+  border: 0 solid #e6e6e6;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+  overflow: hidden; }
+
+.nav__drop-cell {
+  width: 235px;
+  padding: 0 25px; }
+
+.nav__title {
+  text-transform: uppercase;
+  color: #232323;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px 0 8px 0; }
+
+.nav__c-ulist {
+  list-style: none;
+  padding-top: 8px; }
+
+.nav__c-link {
+  text-decoration: none;
+  color: #646464;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px; }
+  .nav__c-link:hover {
+    color: #f16d7f; }
+
+.nav__cimg {
+  position: relative;
+  margin: 14px 0 0 -17px;
+  width: 255px;
+  height: 118px; }
+  .nav__cimg:after {
+    content: "super sale!";
+    text-transform: uppercase;
+    position: absolute;
+    width: 71px;
+    color: #ffffff;
+    right: 10px;
+    bottom: 12px;
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 28px; }

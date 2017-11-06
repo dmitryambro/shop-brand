@@ -1,0 +1,257 @@
+@import 'state/vars'
+@import 'state/class'
+@import 'state/mixins'
+@import 'state/animate'
+
+header
+  border-bottom: 1px solid #ececec
+  width: 100%
+  height: 100px
+
+.header
+  &__center
+    position: relative
+    display: flex
+  &__logo
+    margin-top: 25px
+    display: block
+  &__search-container
+    width: 404px
+    //width: 318px
+    height: 38px
+    border: 1px solid #e6e6e6
+    border-radius: 3px
+    display: flex
+    margin-left: 46px
+    margin-top: 32px
+    //margin-right: 86px
+  &__button
+    border: 0
+    line-height: 37px
+    outline: none
+    cursor: pointer
+    &_browse
+      color:  #222222
+      font-size: 14px
+      font-weight: 300
+      background: -webkit-linear-gradient(-90deg, #f9f9f9 0%, #f5f5f5 100%)
+      background: -moz-linear-gradient(-90deg, #f9f9f9 0%, #f5f5f5 100%)
+      background: -o-linear-gradient(-90deg, #f9f9f9 0%, #f5f5f5 100%)
+      background: -ms-linear-gradient(-90deg, #f9f9f9 0%, #f5f5f5 100%)
+      background: linear-gradient(180deg, #f9f9f9 0%, #f5f5f5 100%)
+      padding: 0 9px 0 15px
+      letter-spacing: 0
+      border-right: 1px solid #e6e6e6
+      border-radius: 3px 0 0 3px
+      &:after
+        content: $ico-drop-down
+        font-family: $ico-font-family
+        font-size: 14px
+        font-weight: 400
+        color: #838383
+        padding-left: 7px
+    &_search
+      background: #ffffff
+      padding: 0 11px
+      border-left: 1px solid #e6e6e6
+      border-radius: 0 3px 3px 0
+      &:after
+        content: $ico-search
+        font-family: $ico-font-family
+        color: #a4a4a4
+        font-size: 14px
+        font-weight: 400
+  &__button_browse:active + &__drop-down-conainer
+    opacity: 1
+    z-index: 4
+  &__input
+    font-size: 14px
+    font-weight: 300
+    border: 0
+    padding: 0 14px
+    outline: none
+    width: 278px + 86px
+    letter-spacing: 0
+    border-radius: 3px 0 0 3px
+    &::placeholder
+      color: #a4a4a4
+  &__acc-container
+    display: flex
+    justify-content: flex-end
+    width: 537px
+  &__shop-cart
+    position: relative
+    background-image: url(../img/shop_card.png)
+    width: 32px
+    height: 29px
+    margin-top: 40px
+    cursor: pointer
+    display: block
+  &__shop-cart:active + &__drop-down-conainer
+    background: red
+  &__shop-cart-count
+    position: absolute
+    border-radius: 50%
+    background-color: #f16d7f
+    width: 19px
+    height: 19px
+    text-align: center
+    color: #fff
+    font-size: 12px
+    font-weight: 700
+    line-height: 19px
+    top: -9px
+    right: -9px
+  &__button-acc
+    border: 0
+    cursor: pointer
+    border-radius: 3px
+    background-color:  #f16d7f
+    height: 38px
+    line-height: 38px
+    padding: 0 15px 0 20px
+    color:  #ffffff
+    font-size: 15px
+    font-weight: 400
+    outline: none
+    margin-top: 31px
+    margin-left: 26px
+    letter-spacing: 0
+    position: relative
+    &:after
+      content: $ico-drop-down
+      font-family: $ico-font-family
+      font-size: 14px
+      padding-left: 9px
+  &__button-acc-dropdown
+    display: none
+    position: absolute
+    top: 30px
+    left: 10px
+    width: 180px+3px
+    background: #ffffff
+    z-index: 99000
+    padding: 12px
+    box-shadow: 0 0 4px #e8e8e8
+    border: 1px solid #e8e8e8
+    border-radius: 5px
+  &__button-acc-dropdown-ul
+    list-style: none
+  &__button-acc-dropdown-li
+    text-align: left
+    padding-left: 10px
+  &__button-acc-dropdown-li,
+  &__button-acc-dropdown-link
+    line-height: 34px
+    font-size: 15px
+    color: #4d4d4d
+    text-decoration: none
+  &__button-acc-dropdown
+    &:before
+      content: ""
+      position: absolute
+      width: 14px
+      height: 14px
+      background: #ffffff
+      box-shadow: 0 0 3px #e6e6e6
+      top: -7px
+      left: 58%
+      transform: translateX(-50%) rotate(45deg)
+      z-index: 2
+      border: 1px solid #e6e6e6
+    &:after
+      content: ""
+      z-index: 3
+      position: absolute
+      top: 0
+      left: 50%
+      transform: translateX(-50%)
+      width: 100%
+      height: 11px
+      background: #ffffff
+      border-radius: 5px
+  &__button-acc:hover &__button-acc-dropdown,
+  &__button-acc-dropdown:hover
+    display: block
+  &__button-login,
+  &__button-register
+    border: 0
+    cursor: pointer
+    border-radius: 3px
+    background-color:  #f16d7f
+    height: 38px
+    line-height: 38px
+    padding: 0 20px
+    color:  #ffffff
+    font-size: 15px
+    font-weight: 400
+    outline: none
+    margin-top: 31px
+    margin-left: 26px
+    letter-spacing: 0
+    text-decoration: none
+  &__button-login
+    background-color: #15BF15
+  &__button-register
+    margin-left: 10px
+  &__button-line-text
+    line-height: 38px
+    margin: 30px 0px 0 10px
+  &__button:hover + &__drop-down-container,
+  &__drop-down-container:hover
+    display: block
+  &__drop-down-container
+    position: absolute
+    width: 262px
+    top: 66px
+    background-color: #fff
+    padding: 13px
+    box-shadow: 0 0 4px #e8e8e8
+    border: 1px solid #e8e8e8
+    border-radius: 5px
+    display: none
+    z-index: 4
+    &:before
+      content: ""
+      position: absolute
+      width: 14px
+      height: 14px
+      background: #ffffff
+      box-shadow: 0 0 3px #e6e6e6
+      top: -7px
+      left: 64px
+      transform: rotate(45deg)
+      z-index: 2
+      border: 1px solid #e6e6e6
+    &:after
+      content: ""
+      z-index: 5
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 13px
+      background: #ffffff
+      border-radius: 6px
+  &__drop-down-title
+    color: #232323
+    font-size: 14px
+    font-weight: 400
+    line-height: 32px
+    border-bottom: 1px solid #e8e8e8
+    padding: 0
+    margin: 0
+    text-transform: uppercase
+  &__drop-down-ulist
+    list-style: none
+    padding: 16px 6px
+  &__drop-down-list
+    display: block
+    color: #4f4f4f
+    font-size: 14px
+    font-weight: 400
+    line-height: 28px
+    list-style: none
+    cursor: pointer
+    &:hover
+      color: #f16d7f

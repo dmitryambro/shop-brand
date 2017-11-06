@@ -1,0 +1,93 @@
+.rose-panel
+    .rose-panel__center.center
+        .rose-panel__left
+            .rose-panel__title new arrivals
+        .rose-panel__right
+            a.rose-panel__crumb(href="#") home
+            a.rose-panel__crumb(href="#") men
+            a.rose-panel__crumb.rose-panel__crumb_active(href="#") new arrivals
+
+.shop-cart-list__center.center
+    .shop-cart-list__row
+        .shop-cart-list__cell.shop-cart-list__header-cell product details
+        .shop-cart-list__cell.shop-cart-list__header-cell unite price
+        .shop-cart-list__cell.shop-cart-list__header-cell quantity
+        .shop-cart-list__cell.shop-cart-list__header-cell shipping
+        .shop-cart-list__cell.shop-cart-list__header-cell subtotal
+        .shop-cart-list__cell.shop-cart-list__header-cell action
+    .shop-cart-list__row.shop-cart-list__row_content
+        .shop-cart-list__cell
+            img.shop-cart-list__img(src="./img/img_details_1.jpg")
+            .shop-cart-list__details
+                .shop-cart-list__details_title mango people t-shirt
+                .shop-cart-list__details_color Red
+                .shop-cart-list__details_size Xll
+        .shop-cart-list__cell.shop-cart-list__content-cell $150
+        .shop-cart-list__cell
+            input.shop-cart-list__number(value="2")
+        .shop-cart-list__cell.shop-cart-list__content-cell free
+        .shop-cart-list__cell.shop-cart-list__content-cell $300
+        .shop-cart-list__cell.shop-cart-list__content-cell
+            .shop-cart-list__remove
+    .shop-cart-list__row.shop-cart-list__row_content
+        .shop-cart-list__cell
+            img.shop-cart-list__img(src="./img/img_details_2.jpg")
+            .shop-cart-list__details
+                .shop-cart-list__details_title mango people t-shirt
+                .shop-cart-list__details_color Red
+                .shop-cart-list__details_size Xll
+        .shop-cart-list__cell.shop-cart-list__content-cell $150
+        .shop-cart-list__cell
+            input.shop-cart-list__number(value="2")
+        .shop-cart-list__cell.shop-cart-list__content-cell free
+        .shop-cart-list__cell.shop-cart-list__content-cell $300
+        .shop-cart-list__cell.shop-cart-list__content-cell
+            .shop-cart-list__remove
+    .shop-cart-list__row.shop-cart-list__row_content
+        .shop-cart-list__cell
+            img.shop-cart-list__img(src="./img/img_details_3.jpg")
+            .shop-cart-list__details
+                .shop-cart-list__details_title mango people t-shirt
+                .shop-cart-list__details_color Red
+                .shop-cart-list__details_size Xll
+        .shop-cart-list__cell.shop-cart-list__content-cell $150
+        .shop-cart-list__cell
+            input.shop-cart-list__number(value="2")
+        .shop-cart-list__cell.shop-cart-list__content-cell free
+        .shop-cart-list__cell.shop-cart-list__content-cell $300
+        .shop-cart-list__cell.shop-cart-list__content-cell
+            .shop-cart-list__remove
+
+.shop-cart-footer-buttons
+    .shop-cart-footer-buttons__center.center
+        .shop-cart-footer-buttons__left
+            button.shop-cart-footer-buttons__button clear shopping cart
+        .shop-cart-footer-buttons__right
+            button.shop-cart-footer-buttons__button continue shopping
+.shop-delivery
+    .shop-delivery__center.center
+        .address-form
+            .shop-delivery__title shipping address
+            .shop-delivery__select-container
+                select.shop-delivery__select-container_select
+                    option(value="") Bangladesh
+                    option(value="") Bangladesh
+                    option(value="") Bangladesh
+                    option(value="") Bangladesh
+                    option(value="") Bangladesh
+            input.shop-delivery__input(placeholder="State")
+            input.shop-delivery__input(placeholder="Postcode / Zip")
+            button.shop-delivery__button get a quote
+        .coupon-form
+            .shop-delivery__title coupon discount
+            .shop-delivery__info Enter your coupon code if you have one
+            input.shop-delivery__input(placeholder="State")
+            button.shop-delivery__button get a quote
+        .shop-cart-total
+            .shop-cart-total__sub-total
+                .shop-cart-total__sub-total_text sub total
+                .shop-cart-total__sub-total_price $900
+            .shop-cart-total__total
+                .shop-cart-total__total_text global total
+                .shop-cart-total__total_price $900
+            button.shop-cart-total__button proceed to checkout

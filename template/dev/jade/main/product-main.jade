@@ -1,0 +1,69 @@
+.rose-panel
+    .rose-panel__center.center
+        .rose-panel__left
+            .rose-panel__title new arrivals
+        .rose-panel__right
+            a.rose-panel__crumb(href="#") home
+            a.rose-panel__crumb(href="#") men
+            a.rose-panel__crumb.rose-panel__crumb_active(href="#") new arrivals
+
+.product-slider
+    img.product-slider__img(src="./img/girl.jpg")
+    .product-slider__arrow
+    .product-slider__arrow.product-slider__arrow_right
+
+.product-info
+    .center.product-info__center
+        h4.product-info__title women collection
+        h3.product-info__title2 MOSCHINO CHEAP AND CHIC
+        p.product-info__text Compellingly actualize fully researched processes before proactive outsourcing. Progressively syndicate collaborative architectures before cutting-edge services. Completely visualize parallel core competencies rather than exceptional portals.
+        .product-info__options
+            .product-info__option
+                |material:
+                .product-info__option_black cotton
+            .product-info__option
+                |designer:
+                .product-info__option_black binburhan
+        .product-info__price $561
+        form.product-info__form
+            .product-info__form-item
+                label(for="sel1").product-info__label choose color
+                .product-info__select1-container
+                    select.product-info__select1#sel1
+                        option(value="red") Red
+                        option(value="green") Green
+                        option(value="blue") Blue
+            .product-info__form-item
+                label(for="sel2").product-info__label choose size
+                .product-info__select2-container
+                    select.product-info__select2#sel2
+                        option(value="xxl") xxl
+                        option(value="l") l
+                        option(value="m") m
+            .product-info__form-item
+                label(for="i1").product-info__label quantity
+                input(type="number" value="2").product-info__input-number#i1
+            button.product-info__button
+                span.product-info__button-ico
+                |Add to Cart
+
+.products
+    .products__center.center
+        .products__title you may like also
+        section.products__container
+            article.products__product.product
+                img.product__img(src="./img/also_girl_1.jpg")
+                .product__title mango people t-shirt
+                .product__price $52.00
+            article.products__product.product
+                img.product__img(src="./img/also_girl_2.jpg")
+                .product__title mango people t-shirt
+                .product__price $52.00
+            article.products__product.product
+                img.product__img(src="./img/also_girl_3.jpg")
+                .product__title mango people t-shirt
+                .product__price $52.00
+            article.products__product.product
+                img.product__img(src="./img/also_girl_4.jpg")
+                .product__title mango people t-shirt
+                .product__price $52.00
