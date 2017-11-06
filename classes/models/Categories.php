@@ -65,7 +65,8 @@ class Categories {
     }
 
     public function removeCategory ($id) {
-        $sql = 'DELETE FROM `sub_category` WHERE `category_id` = ' . $id . ';';
+        $sql = 'DELETE FROM `product` WHERE `category_id` = ' . $id . ';';
+        $sql.= 'DELETE FROM `sub_category` WHERE `category_id` = ' . $id . ';';
         $sql.= 'DELETE FROM `category` WHERE `id` = ' . $id;
         $pdo = APP::$app->db->pdo;
         try {
@@ -102,7 +103,8 @@ class Categories {
     }
 
     public function removeSubCategory ($id) {
-        $sql = 'DELETE FROM `sub_category` WHERE `id` = "' . $id . '"';
+        $sql = 'DELETE FROM `product` WHERE `sub_category_id` = ' . $id . ';';
+        $sql.= 'DELETE FROM `sub_category` WHERE `id` = ' . $id;
         $pdo = APP::$app->db->pdo;
         try {
             $stmt = $pdo->prepare($sql);

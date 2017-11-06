@@ -37,12 +37,13 @@ class ProductsController extends Controller {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         if ($page < 1) $page = 1;
 
+        $like = '`name` LIKE "%' . $searchText . '%" OR `description` LIKE "%' . $searchText . '%"';
+
         $limit = 8;
 
         if (count($selectCategories) == 0) $selectSubCategories = array();
 
         if (count($selectCategories) == 0 && count($selectSubCategories) == 0) {
-            $like = '`name` LIKE "' . $searchText . '" OR `description` LIKE "' . $searchText . '"';
             $viewProductsList = $products->getFeaturedProducts2($like, $page, $limit);
             $pages = ceil(intval($products->getRowsCount('SELECT count(*) FROM `product` WHERE ' . $like)) / $limit);
             $gets = '?';
@@ -54,7 +55,6 @@ class ProductsController extends Controller {
             foreach ($selectCategories as $category) {
                 array_push($sqlCategories, '`category_id` = ' . $category);
             }
-            $like = '`name` LIKE "' . $searchText . '" OR `description` LIKE "' . $searchText . '"';
             $viewProductsList = $products->getFilterByCategories($sqlCategories, $like, $page, $limit);
             $sql = 'SELECT count(*) FROM `product` WHERE (' . implode(' OR ', $sqlCategories) . ') AND (' . $like . ')';
             $pages = ceil(intval($products->getRowsCount($sql)) / $limit);
@@ -68,7 +68,6 @@ class ProductsController extends Controller {
             foreach ($selectSubCategories as $subCategory) {
                 array_push($sqlSubCategories, '`sub_category_id` = ' . $subCategory);
             }
-            $like = '`name` LIKE "' . $searchText . '" OR `description` LIKE "' . $searchText . '"';
             $viewProductsList = $products->getFilterBySubCategories($sqlSubCategories, $like, $page, $limit);
             $sql = 'SELECT count(*) FROM `product` WHERE (' . implode(' OR ', $sqlSubCategories) . ') AND (' . $like . ')';
             $pages = ceil(intval($products->getRowsCount($sql)) / $limit);

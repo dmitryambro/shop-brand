@@ -69,4 +69,32 @@ class User {
         setCookie('username', null, time() - 3600, '/');
         setCookie('password', null, time() - 3600, '/');
     }
+
+    public function getUsers ($page, $limit) {
+        $sql = 'SELECT `user`.`id`, `user`.`username`, `user`.`first_name`, `user`.`last_name`, `user`.`email`, `permission`.`name` AS `permission_name`, `permission`.`id` AS `permission_id` FROM `user` LEFT JOIN `permission` ON `user`.`permission_id` = `permission`.`id`';
+        $pdo = APP::$app->db->pdo;
+        try {
+            $this->data = array();
+            $rows = $pdo->query($sql);
+            return $rows->fetchAll();
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
+
+    public function update ($id, $data) {
+        $sql_data = array();
+        foreach ($data as $key => $val) {
+            array_push($sql_data, '`' . $key . '` = "' . $val . '"');
+        }
+        $sql = 'UPDATE `user` SET ' . implode(', ', $sql_data) . ' WHERE `id` = ' . $id;
+        $pdo = APP::$app->db->pdo;
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            return true;
+        } catch (\PDOException $e) {
+            return false;
+        }
+    }
 }

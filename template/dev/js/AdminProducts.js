@@ -1,4 +1,4 @@
-function Categories (categoriesClass, callback) {
+function Categories(categoriesClass, callback) {
     var self = this;
     this.categoriesClass = categoriesClass;
     this.$categories = $('.' + this.categoriesClass);
@@ -22,12 +22,15 @@ function Categories (categoriesClass, callback) {
     });
 
     this.$categories
-        .on('change', '[name=category]', function () { self.changeCategory($(this)); })
-        .on('change', '[name=sub_category]', function () { self.changeSubCategory($(this)); });
+        .on('change', '[name=category]', function () {
+            self.changeCategory($(this));
+        })
+        .on('change', '[name=sub_category]', function () {
+            self.changeSubCategory($(this));
+        });
 }
 
 Categories.prototype.changeCategory = function ($category) {
-    var self = this;
     var $categoryContainer = $category.parent().parent().parent();
     var categoryId = $category.val();
     var categoryChecked = $category.get(0).checked;
@@ -64,7 +67,7 @@ Categories.prototype.changeSubCategory = function ($subCategory) {
         $categoryContainer.find('.list_category input[type=checkbox]').get(0).checked = true;
     }
     if (subCategoryChecked) {
-        this.selectCategories[categoryId][subCategoryId] = { checked: true };
+        this.selectCategories[categoryId][subCategoryId] = {checked: true};
         hash.setSubCategory(subCategoryId);
     } else {
         delete this.selectCategories[categoryId][subCategoryId];
@@ -82,26 +85,31 @@ Categories.prototype.renderCategories = function () {
     this.$categories.empty();
     this.selectCategories = {};
 
-    var hashCategories = hash.params.categories;
-    var hashSubCategories = hash.params.sub_categories;
-    for (var i = 0; i < hashCategories.length; i++) {
-        var categoryId = hashCategories[i];
-        if (this.categories[categoryId] != null) {
-            this.selectCategories[categoryId] = {};
-            this.categories[categoryId].selected = true;
-            for (var j = 0; j < hashSubCategories.length; j++) {
-                var subCategoryId = hashSubCategories[j];
-                if (this.categories[categoryId].sub_categories != null) {
-                    for (var n = 0; n < this.categories[categoryId].sub_categories.length; n++) {
-                        if (this.categories[categoryId].sub_categories[n].id == subCategoryId) {
-                            this.selectCategories[categoryId][subCategoryId] = { checked: true };
-                            this.categories[categoryId].sub_categories[n].selected = true;
-                        }
-                    }
-                }
-            }
+    var hashCategories = hash.params.categories.sort();
+    var hashSubCategories = hash.params.sub_categories.sort();
+    var self = this;
+    hashCategories.forEach(function (categoryId) {
+        self.selectCategories[categoryId] = {};
+        self.categories[categoryId].selected = true;
+        var subCategoriesSelectedCount = 0;
+        self.categories[categoryId].sub_categories.map(function (x) { return x.id; }).forEach(function (subCategoryId, subCategoryN) {
+            hashSubCategories = hashSubCategories.filter(function (hashSubCategoryId) {
+                if (hashSubCategoryId != subCategoryId) return true;
+                self.selectCategories[categoryId][subCategoryId] = { checked: true };
+                self.categories[categoryId].sub_categories[subCategoryN].selected = true;
+                subCategoriesSelectedCount++;
+                return false;
+            });
+        });
+        if (subCategoriesSelectedCount === 0) {
+            self.categories[categoryId].sub_categories.forEach(function (subCategory, subCategoryN) {
+                var subCategoryId = subCategory.id;
+                self.selectCategories[categoryId][subCategoryId] = { checked: true };
+                self.categories[categoryId].sub_categories[subCategoryN].selected = true;
+                hash.setSubCategory(subCategoryId);
+            });
         }
-    }
+    });
 
     var categoriesKeys = Object.keys(this.categories);
     for (var i = 0; i < categoriesKeys.length; i++) {
@@ -111,12 +119,17 @@ Categories.prototype.renderCategories = function () {
 };
 
 Categories.prototype.renderCategory = function (category) {
-    var $category = $('<div />', { 'class': 'categories-list__category', 'data-id': category.id });
+    var $category = $('<div />', {'class': 'categories-list__category', 'data-id': category.id});
     var $div = $('<div />');
-    var $label = $('<label />', { 'class': 'list_category custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-2' });
-    var $checkBox = $('<input />', { 'class': 'custom-control-input', 'type': 'checkbox', 'value': category.id, 'name': 'category' });
-    var $span = $('<span />', { 'class': 'custom-control-indicator' });
-    var $text = $('<b />', { 'class': 'custom-control-description' }).html(category.name);
+    var $label = $('<label />', {'class': 'list_category custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-2'});
+    var $checkBox = $('<input />', {
+        'class': 'custom-control-input',
+        'type': 'checkbox',
+        'value': category.id,
+        'name': 'category'
+    });
+    var $span = $('<span />', {'class': 'custom-control-indicator'});
+    var $text = $('<b />', {'class': 'custom-control-description'}).html(category.name);
     if (category.selected) $checkBox.get(0).checked = true;
     $label.append($checkBox).append($span).append($text);
     $div.append($label);
@@ -129,17 +142,23 @@ Categories.prototype.renderCategory = function (category) {
 
 Categories.prototype.renderSubCategory = function (subCategory) {
     var $div = $('<div />');
-    var $label = $('<label />', { 'class': 'list_sub_category custom-control custom-checkbox mb-2 offset-1 mr-sm-2 mb-sm-2' });
-    var $checkBox = $('<input />', { 'class': 'custom-control-input', 'type': 'checkbox', 'value': subCategory.id, 'name': 'sub_category', 'data-category-id': subCategory.category_id });
-    var $span = $('<span />', { 'class': 'custom-control-indicator' });
-    var $text = $('<span />', { 'class': 'custom-control-description' }).html(subCategory.name);
+    var $label = $('<label />', {'class': 'list_sub_category custom-control custom-checkbox mb-2 offset-1 mr-sm-2 mb-sm-2'});
+    var $checkBox = $('<input />', {
+        'class': 'custom-control-input',
+        'type': 'checkbox',
+        'value': subCategory.id,
+        'name': 'sub_category',
+        'data-category-id': subCategory.category_id
+    });
+    var $span = $('<span />', {'class': 'custom-control-indicator'});
+    var $text = $('<span />', {'class': 'custom-control-description'}).html(subCategory.name);
     if (subCategory.selected) $checkBox.get(0).checked = true;
     $label.append($checkBox).append($span).append($text);
     $div.append($label);
     return $div;
 };
 
-function Hash () {
+function Hash() {
     this.params = {
         categories: [],
         sub_categories: [],
@@ -158,7 +177,7 @@ Hash.prototype.setCategory = function (category) {
 };
 
 Hash.prototype.delCategory = function (category) {
-    this.params.categories = this.params.categories.filter( function (c) {
+    this.params.categories = this.params.categories.filter(function (c) {
         return c != category;
     });
     this.changeHash()
@@ -174,14 +193,16 @@ Hash.prototype.setSubCategory = function (subCategory) {
 };
 
 Hash.prototype.delSubCategory = function (subCategory) {
-    this.params.sub_categories = this.params.sub_categories.filter( function (c) {
+    this.params.sub_categories = this.params.sub_categories.filter(function (c) {
         return c != subCategory;
     });
     this.changeHash()
 };
 
 Hash.prototype.explain = function () {
-    var hash = window.location.hash.slice(1).split('&').map(function (a) { return a.split('='); });
+    var hash = window.location.hash.slice(1).split('&').map(function (a) {
+        return a.split('=');
+    });
     for (var i = 0; i < hash.length; i++) {
         var _hash = hash[i];
         if (_hash.length === 2) {
@@ -201,15 +222,19 @@ Hash.prototype.explain = function () {
 
 Hash.prototype.changeHash = function () {
     var hash = [];
-    this.params.categories = this.params.categories.filter( function (category) { return /.+/.test(category); });
-    this.params.sub_categories = this.params.sub_categories.filter( function (subCategory) { return /.+/.test(subCategory); });
+    this.params.categories = this.params.categories.filter(function (category) {
+        return /.+/.test(category);
+    });
+    this.params.sub_categories = this.params.sub_categories.filter(function (subCategory) {
+        return /.+/.test(subCategory);
+    });
     if (this.params.categories.length > 0) hash.push(['categories', this.params.categories.join(',')].join('='));
     if (this.params.sub_categories.length > 0) hash.push(['sub_categories', this.params.sub_categories.join(',')].join('='));
     hash.push(['page', this.params.page].join('='));
     window.location.hash = '#' + hash.join('&');
 };
 
-function ModalProduct (modalId, classButtonOpen, categories) {
+function ModalProduct(modalId, classButtonOpen, categories) {
     var self = this;
     this.modalId = modalId;
     this.classButtonOpen = classButtonOpen;
@@ -227,7 +252,7 @@ function ModalProduct (modalId, classButtonOpen, categories) {
     this.$image = $('#' + this.modalId + '_image');
     this.$imageView = $('#' + this.modalId + '_image_view');
     this.$imageUploadProgress = $('#' + this.modalId + '_image_upload_progress');
-    this.defaults = { name: '', description: '', categoryId: '', price: '', count: 1, weight: 1, size: '' };
+    this.defaults = {name: '', description: '', categoryId: '', price: '', count: 1, weight: 1, size: ''};
 
     var categoriesIds = Object.keys(this.categories.categories);
     if (categoriesIds.length === 0) {
@@ -239,10 +264,18 @@ function ModalProduct (modalId, classButtonOpen, categories) {
 
     this.renderCategoryOptions();
     this.defaults.categoryId = categoriesIds[0];
-    this.$category.on('change', function () { self.renderSubCategoryOptions($(this).val()) });
-    $(document).on('click', '.' + this.classButtonOpen, function (e) { self.open(e); });
-    $('#' + this.modalId + '_btn_save').on('click', function () { self.save(); });
-    this.$image.on('change', function () { self.uploadImage(); });
+    this.$category.on('change', function () {
+        self.renderSubCategoryOptions($(this).val())
+    });
+    $(document).on('click', '.' + this.classButtonOpen, function (e) {
+        self.open(e);
+    });
+    $('#' + this.modalId + '_btn_save').on('click', function () {
+        self.save();
+    });
+    this.$image.on('change', function () {
+        self.uploadImage();
+    });
 }
 
 ModalProduct.prototype.uploadImage = function () {
@@ -254,7 +287,10 @@ ModalProduct.prototype.uploadImage = function () {
     var imageSize = this.$image.get(0).files[0].size;
     var imageExt = imageName.substr((imageName.lastIndexOf('.') + 1)).toLowerCase();
     switch (imageExt) {
-        case 'jpg': case 'jpeg': case 'png': case 'gif':
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
             if (imageSize < 1000000) {
                 $.post({
                     url: '/admin/ajaxUploadImage',
@@ -268,7 +304,7 @@ ModalProduct.prototype.uploadImage = function () {
                     xhr: function () {
                         var xhr = $.ajaxSettings.xhr();
                         if (xhr.upload) {
-                            xhr.upload.addEventListener('progress', function( e) {
+                            xhr.upload.addEventListener('progress', function (e) {
                                 var percent = 0;
                                 var position = e.loaded || e.position;
                                 var total = e.total;
@@ -288,7 +324,8 @@ ModalProduct.prototype.uploadImage = function () {
                         console.log(json);
                         this.$imageView.attr('src', json.path).show();
                     },
-                    error: function () {}
+                    error: function () {
+                    }
                 });
             }
             break;
@@ -300,7 +337,7 @@ ModalProduct.prototype.renderCategoryOptions = function () {
     var categoriesIds = Object.keys(this.categories.categories);
     for (var i = 0; i < categoriesIds.length; i++) {
         var categoryId = categoriesIds[i];
-        var $option = $('<option />', { 'value': categoryId }).html(this.categories.categories[categoryId].name);
+        var $option = $('<option />', {'value': categoryId}).html(this.categories.categories[categoryId].name);
         this.$category.append($option);
     }
 };
@@ -309,7 +346,7 @@ ModalProduct.prototype.renderSubCategoryOptions = function (categoryId) {
     var subCategories = this.categories.categories[categoryId].sub_categories;
     this.$subCategory.empty();
     for (var i = 0; i < subCategories.length; i++) {
-        var $option = $('<option />', { 'value': subCategories[i].id }).html(subCategories[i].name);
+        var $option = $('<option />', {'value': subCategories[i].id}).html(subCategories[i].name);
         this.$subCategory.append($option);
     }
 };
@@ -334,13 +371,13 @@ ModalProduct.prototype.check = function () {
         result: true,
         message: ''
     };
-    if (!/.+/.test(formData.name)) formResult = { result: false, message: 'name' };
-    else if (!/.+/.test(formData.description)) formResult = { result: false, message: 'description' };
-    else if (!/^[0-9]+?(\.|,)?[0-9]+$/.test(formData.price)) formResult = { result: false, message: 'price' };
-    else if (!/^[0-9]+$/.test(formData.count)) formResult = { result: false, message: 'Count must by a number' };
-    else if (!/^[0-9]+?(\.|,)?[0-9]+$/.test(formData.weight)) formResult = { result: false, message: 'weight' };
-    else if (!/.+/.test(formData.size)) formResult = { result: false, message: 'size' };
-    else if (!/.+/.test(formData.src)) formResult = { result: false, message: 'image' };
+    if (!/.+/.test(formData.name)) formResult = {result: false, message: 'name'};
+    else if (!/.+/.test(formData.description)) formResult = {result: false, message: 'description'};
+    else if (!/^[0-9]+?(\.|,)?[0-9]+$/.test(formData.price)) formResult = {result: false, message: 'price'};
+    else if (!/^[0-9]+$/.test(formData.count)) formResult = {result: false, message: 'Count must by a number'};
+    else if (!/^[0-9]+?(\.|,)?[0-9]+$/.test(formData.weight)) formResult = {result: false, message: 'weight'};
+    else if (!/.+/.test(formData.size)) formResult = {result: false, message: 'size'};
+    else if (!/.+/.test(formData.src)) formResult = {result: false, message: 'image'};
     if (formResult.result) {
         this.$alert.hide().html('');
         return true;
@@ -350,7 +387,7 @@ ModalProduct.prototype.check = function () {
     return false;
 };
 
-function ModalProductAdd (modalId, classButtonOpen, categories) {
+function ModalProductAdd(modalId, classButtonOpen, categories) {
     ModalProduct.call(this, modalId, classButtonOpen, categories);
 }
 
@@ -378,14 +415,21 @@ ModalProductAdd.prototype.save = function () {
             dataType: 'json',
             context: this,
             success: function (json) {
-
+                if (json.result == 0) {
+                    globalAlerts.render('danger', '<strong>Error!</strong> ' + json.message);
+                    return false;
+                }
+                $('#' + this.modalId).modal('hide');
+                $(document).trigger('filter-change');
+                globalAlerts.render('success', '<strong>Success!</strong> Product added!');
             },
-            error: function (err) {}
+            error: function (err) {
+            }
         });
     }
 };
 
-function ModalProductEdit (modalId, classButtonOpen, categories) {
+function ModalProductEdit(modalId, classButtonOpen, categories) {
     ModalProduct.call(this, modalId, classButtonOpen, categories);
     this.editNowId = null;
 }
@@ -399,7 +443,7 @@ ModalProductEdit.prototype.open = function (e) {
     this.editNowId = id;
     $.get({
         url: '/admin/ajaxGetProduct',
-        data: { id: id },
+        data: {id: id},
         dataType: 'json',
         context: this,
         success: function (json) {
@@ -432,23 +476,37 @@ ModalProductEdit.prototype.save = function () {
             dataType: 'json',
             context: this,
             success: function (json) {
-
+                if (json.result == 0) {
+                    globalAlerts.render('danger', '<strong>Error!</strong> ' + json.message);
+                    return false;
+                }
+                $('#' + this.modalId).modal('hide');
+                $(document).trigger('filter-change');
+                globalAlerts.render('success', '<strong>Success!</strong> Product edit!');
             },
-            error: function (err) {}
+            error: function (err) {
+            }
         });
     }
 };
 
-function Products (classProductsContainer, classButtonEdit, classButtonRemove, categories) {
+function Products(classProductsContainer, classButtonEdit, classButtonRemove, idPaginationContainer, categories) {
     var self = this;
     this.classProductsContainer = classProductsContainer;
     this.classButtonEdit = classButtonEdit;
     this.classButtonRemove = classButtonRemove;
+    this.idPaginationContainer = idPaginationContainer;
     this.categories = categories;
     this.$container = $('.' + this.classProductsContainer);
     this.renderPage();
     $(document).on('filter-change', function () {
         hash.params.page = '1';
+        hash.changeHash();
+        self.renderPage();
+    });
+    $('#' + this.idPaginationContainer).on('click', '.products_change_page', function () {
+        var page = $(this).attr('data-page');
+        hash.params.page = page;
         hash.changeHash();
         self.renderPage();
     });
@@ -460,7 +518,8 @@ Products.prototype.getAjaxPage = function (page, categoriesIds, subCategoriesIds
         data: {
             page: page,
             categories_ids: categoriesIds,
-            sub_categories_ids: subCategoriesIds
+            sub_categories_ids: subCategoriesIds,
+            limit: 9
         },
         dataType: 'json',
         context: this,
@@ -469,47 +528,47 @@ Products.prototype.getAjaxPage = function (page, categoriesIds, subCategoriesIds
                 console.log(json.message);
                 return false;
             }
-            callback.call(this, json.products);
+            callback.call(this, json.products, json.pages);
         },
-        error: function () {}
+        error: function () {
+        }
     })
 };
 
 Products.prototype.renderPage = function () {
     var page = hash.params.page;
-    var categoriesIds = null;
-    var subCategoriesIds = null;
-    if (Object.keys(this.categories.selectCategories).length > 0) {
-        categoriesIds = Object.keys(this.categories.selectCategories);
-        subCategoriesIds = [];
-        for (var i = 0; i < categoriesIds.length; i++) {
-            subCategoriesIds = subCategoriesIds.concat(Object.keys(this.categories.selectCategories[categoriesIds[i]]));
-        }
-        categoriesIds = categoriesIds.join(',');
-        subCategoriesIds = subCategoriesIds.join(',');
-    }
+    var categoriesIds = hash.params.categories;
+    var subCategoriesIds = hash.params.sub_categories;
     this.$container.empty();
-    this.getAjaxPage(page, categoriesIds, subCategoriesIds, function (products) {
+    this.getAjaxPage(page, categoriesIds.join(','), subCategoriesIds.join(','), function (products, pages) {
+        if (products.length == 0) this.renderEmpty();
         for (var i = 0; i < products.length; i++) {
             this.$container.append(this.renderProduct(products[i]));
         }
+        this.renderPagination(pages);
     });
 };
 
 Products.prototype.renderProduct = function (product) {
-    var $product = $('<div />', { 'class': 'col-md-4 mb-2 admin-product', 'data-id': product.id });
-    var $card = $('<div />', { 'class': 'card' });
-    var $cardImg = $('<img />', { 'class': 'card-img-top', 'src': product.image_url, 'alt': product.name });
-    var $cardBody = $('<div />', { 'class': 'card-body admin-product__body' });
-    var $cardBodyH4 = $('<h4 />', { 'class': 'card-title' }).html(product.name);
-    var $cardBodyH6 = $('<h6 />', { 'class': 'card-subtitle mb-2 text-muted' }).html('test/test');
-    var $cardBodyP = $('<p />', { 'class': 'admin-product__p' }).html(product.description);
-    var $cardBodyUl = $('<ul />', { 'class': 'list-group list-group-flush' });
-    var $cardBodyUlPrice = $('<li />', { 'class': 'list-group-item' }).html('<b>Price: </b> <span>' + product.price + '$</span>');
-    var $cardBodyUlCount = $('<li />', { 'class': 'list-group-item' }).html('<b>Count: </b> <span>' + product.count + '</span>');
-    var $cardBody2 = $('<div />', { 'class': 'card-body' });
-    var $cardBody2ButtonEdit = $('<button />', { 'class': 'btn btn-primary admin_edit_product', 'data-id': product.id }).html('Edit');
-    var $cardBody2ButtonRemove = $('<button />', { 'class': 'btn btn-danger admin_remove_product', 'data-id': product.id }).html('Remove');
+    var $product = $('<div />', {'class': 'col-md-4 mb-2 admin-product', 'data-id': product.id});
+    var $card = $('<div />', {'class': 'card'});
+    var $cardImg = $('<img />', {'class': 'card-img-top', 'src': product.image_url, 'alt': product.name});
+    var $cardBody = $('<div />', {'class': 'card-body admin-product__body'});
+    var $cardBodyH4 = $('<h4 />', {'class': 'card-title'}).html(product.name);
+    var $cardBodyH6 = $('<h6 />', {'class': 'card-subtitle mb-2 text-muted'}).html('test/test');
+    var $cardBodyP = $('<p />', {'class': 'admin-product__p'}).html(product.description);
+    var $cardBodyUl = $('<ul />', {'class': 'list-group list-group-flush'});
+    var $cardBodyUlPrice = $('<li />', {'class': 'list-group-item'}).html('<b>Price: </b> <span>' + product.price + '$</span>');
+    var $cardBodyUlCount = $('<li />', {'class': 'list-group-item'}).html('<b>Count: </b> <span>' + product.count + '</span>');
+    var $cardBody2 = $('<div />', {'class': 'card-body'});
+    var $cardBody2ButtonEdit = $('<button />', {
+        'class': 'btn btn-primary admin_edit_product',
+        'data-id': product.id
+    }).html('Edit');
+    var $cardBody2ButtonRemove = $('<button />', {
+        'class': 'btn btn-danger admin_remove_product',
+        'data-id': product.id
+    }).html('Remove');
     $cardBodyUl.append($cardBodyUlPrice).append($cardBodyUlCount);
     $cardBody.append($cardBodyH4).append($cardBodyH6).append($cardBodyP).append($cardBodyUl);
     $cardBody2.append($cardBody2ButtonEdit).append(' ').append($cardBody2ButtonRemove);
@@ -517,11 +576,47 @@ Products.prototype.renderProduct = function (product) {
     return $product.append($card);
 };
 
+Products.prototype.renderEmpty = function () {
+    this.$container.html('<h3>Empty list!</h3>');
+};
+
+Products.prototype.renderPagination = function (pages) {
+    var $container = $('#' + this.idPaginationContainer);
+    $container.empty();
+    if (pages < 2) return false;
+    var $li = $('<li />', { 'class': 'page-item' });
+    var $a = $('<a />', { 'class': 'page-link' });
+
+    var $title = $li.clone().append($a.clone().text('Pages:'));
+    $container.append($title);
+
+    for (var page = 1; page <= pages; page++) {
+        var $page = $li.clone().append($a.clone().text(page).attr('data-page', page).addClass('products_change_page'));
+        if (page == hash.params.page) $page.addClass('active');
+        $container.append($page);
+    }
+};
+
+function globalAlerts (idContainer) {
+    this.idContainer = idContainer;
+    this.$container = $('#' + this.idContainer);
+}
+
+globalAlerts.prototype.render = function (type, content) {
+    this.$container.empty();
+    var $alert = $('<div />', { 'class': 'alert alert-' + type + ' alert-dismissible fade show', 'role': 'alert' }).html(content);
+    var $button = $('<button />', { 'type': 'button', 'class': 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' })
+            .append($('<span />', { 'aria-hidden': 'true' }).html('&times;'));
+    $alert.append($button);
+    this.$container.html($alert);
+    $(document).scrollTop(0);
+};
+
 $(document).ready(function () {
     window.hash = new Hash();
-
+    window.globalAlerts = new globalAlerts('global_alerts');
     new Categories('categories-list', function () {
-        new Products('products-container', 'admin_edit_product', 'admin_remove_product', this);
+        new Products('products-container', 'admin_edit_product', 'admin_remove_product', 'products_pagination', this);
         new ModalProductAdd('add_product_modal', 'add_product', this);
         new ModalProductEdit('edit_product_modal', 'admin_edit_product', this);
     });

@@ -9,6 +9,7 @@ use classes\models\Products;
 
 class AdminController extends Controller {
     public function actionIndex () {
+        header('Location: /admin/products');
     }
 
     public function actionCategories () {
@@ -65,6 +66,19 @@ class AdminController extends Controller {
             echo $this->render('admin_products', array(
                 'cssname' => 'admin',
                 'jsname' => 'AdminProducts'
+            ));
+        } else {
+            header('Location: /');
+        }
+    }
+
+    public function actionUsers () {
+        $user = new User();
+        if ($user->checkFromCookies()) {
+            $this->layout = 'layout_admin';
+            echo $this->render('admin_users', array(
+                'cssname' => 'admin',
+                'jsname' => 'AdminUsers'
             ));
         } else {
             header('Location: /');
@@ -258,15 +272,28 @@ class AdminController extends Controller {
     }
 
     public function actionAjaxGetProducts () {
-        $limitOnPage = isset($_GET['limit_on_page']) ? intval($_GET['limit_on_page']) : 10;
+        $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $categoriesIds = isset($_GET['categories_ids']) ? $_GET['categories_ids'] : null;
-        $subCategoriesIds = isset($_GET['sub_categories_ids']) ? $_GET['sub_categories_ids'] : null;
+//        $categoriesIds = isset($_GET['categories_ids']) ? $_GET['categories_ids'] : null;
+        $subCategoriesIds = isset($_GET['sub_categories_ids']) ? explode(',', $_GET['sub_categories_ids']) : array();
         $products = new Products();
-        $productsList = $products->get($limitOnPage, $page, $categoriesIds, $subCategoriesIds);
+        $like = '`name` LIKE "%"';
+        if (count($subCategoriesIds) == 0 || $subCategoriesIds[0] == '') {
+            $productsList = $products->getFeaturedProducts2($like, $page, $limit);
+            $pages = ceil(intval($products->getRowsCount('SELECT count(*) FROM `product` WHERE ' . $like)) / $limit);
+        } else {
+            $sqlSubCategories = array();
+            foreach ($subCategoriesIds as $subCategory) {
+                array_push($sqlSubCategories, '`sub_category_id` = ' . $subCategory);
+            }
+            $productsList = $products->getFilterBySubCategories($sqlSubCategories, $like, $page, $limit);
+            $sql = 'SELECT count(*) FROM `product` WHERE (' . implode(' OR ', $sqlSubCategories) . ') AND (' . $like . ')';
+            $pages = ceil(intval($products->getRowsCount($sql)) / $limit);
+        }
         echo json_encode(array(
             'result' => '1',
-            'products' => $productsList
+            'products' => $productsList,
+            'pages' => $pages
         ));
     }
 
@@ -303,6 +330,37 @@ class AdminController extends Controller {
                 echo json_encode(array('result' => '0', 'message' => 'File type error'));
                 return false;
             }
+        }
+    }
+
+    public function actionAjaxGetUsers () {
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
+        $user = new User();
+        $users = $user->getUsers($page, $limit);
+        echo json_encode(array('result' => 1, 'users' => $users));
+    }
+
+    public function actionAjaxSaveUser () {
+        $id = isset($_POST['id']) ? $_POST['id'] : null;
+        $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : null;
+        $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : null;
+        $email = isset($_POST['email']) ? $_POST['email'] : null;
+        $permission_id = isset($_POST['permission_id']) ? $_POST['permission_id'] : null;
+        if (empty($id) || empty($first_name) || empty($last_name) || empty($email) || empty($permission_id)) {
+            echo json_encode(array('result' => '0', 'message' => 'post data send error'));
+            return false;
+        }
+        $user = new User();
+        if ($user->update($id, array(
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'permission_id' => $permission_id
+        ))) {
+            echo json_encode(array('result' => '1'));
+        } else {
+            echo json_encode(array('result' => '0', 'message' => 'sql'));
         }
     }
 }

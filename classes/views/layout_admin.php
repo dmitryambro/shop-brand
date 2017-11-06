@@ -3,10 +3,9 @@
 $uri = $_SERVER['REDIRECT_URL'];
 $navigation = array(
     '/' =>  array( 'title' => 'Website', 'active' => false ),
-    '/admin' => array( 'title' => 'Admin', 'active' => false ),
     '/admin/categories' => array( 'title' => 'Categories', 'active' => false ),
     '/admin/products' => array( 'title' => 'Products', 'active' => false ),
-    '/admin/user' =>  array( 'title' => 'Users', 'active' => false )
+    '/admin/users' =>  array( 'title' => 'Users', 'active' => false )
 );
 if (!empty($navigation[$uri])) {
     $navigation[$uri]['active'] = true;
@@ -160,7 +159,7 @@ function renderModalProduct ($id, $title) {
 
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Brand admin panel</a>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <?php foreach ($navigation as $href => $arr_nav) : ?>
