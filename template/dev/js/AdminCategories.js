@@ -143,10 +143,9 @@ AdminCategories.prototype.addSubCategorySave = function (e) {
             }
             var $h1 = $('<h1 />', { 'class': 'display-4 border border-left-0 border-top-0 border-right-0' }).html('<i class="fa fa-angle-double-right" aria-hidden="true"></i>');
             var $span = $('<span />', { 'class': 'sub_category_name', 'data-id': data.id }).html(name);
-            var $buttonView = $(' <button />', { 'class': 'btn btn-primary'}).html('View products');
             var $buttonEdit = $(' <button />', { 'class': 'btn btn-warning edit_sub_category', 'data-id': data.id }).html('Edit');
             var $buttonRemove = $('<button />', { 'class': 'btn btn-danger remove_sub_category', 'data-id': data.id }).html('Remove');
-            $h1.append(' ').append($span).append(' ').append($buttonView).append(' ').append($buttonEdit).append(' ').append($buttonRemove);
+            $h1.append(' ').append($span).append(' ').append($buttonEdit).append(' ').append($buttonRemove);
             $h1.appendTo('#sub_categories_list');
             $('#' + modalId).modal('hide');
         },

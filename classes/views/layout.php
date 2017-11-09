@@ -28,7 +28,7 @@
 <body>
 <div class="container">
     <header class="header">
-        <div class="header__center center"><a href="./index.html" class="header__logo logo"></a>
+        <div class="header__center center"><a href="/" class="header__logo logo"></a>
             <form action="/products/filter" class="header__search-container">
 <!--                <button class="header__button header__button_browse">Browse</button>-->
                 <div class="header__drop-down-container">
@@ -49,11 +49,13 @@
                         <div class="header__button-acc-dropdown">
                             <ul class="header__button-acc-dropdown-ul">
                                 <li class="header__button-acc-dropdown-li"><?= $this->params['user_data']['first_name'] ?> <?= $this->params['user_data']['last_name'] ?></li>
-                                <?php if ($this->params['user_data']['permission_id'] > 0) : ?>
+                                <?php if ($this->params['user_data']['permission_id'] == 3) : ?>
                                     <li class="header__button-acc-dropdown-li"><a
                                                 class="header__button-acc-dropdown-link" href="/admin">Admin panel</a>
                                     </li>
                                 <?php endif; ?>
+                                <li class="header__button-acc-dropdown-li"><a class="header__button-acc-dropdown-link"
+                                                                              href="/orders">Orders</a></li>
                                 <li class="header__button-acc-dropdown-li"><a class="header__button-acc-dropdown-link"
                                                                               href="/login/out">Logout</a></li>
                             </ul>

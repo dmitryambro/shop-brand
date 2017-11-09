@@ -111,6 +111,7 @@ CartRender.prototype.emptyContainer = function () {
 };
 
 CartRender.prototype.renderItem = function (product, count) {
+    console.log(product);
     var $row = $('<div />', { 'class': 'shop-cart-list__row shop-cart-list__row_content' });
     var $cartCell1 = $('<div />', { 'class': 'shop-cart-list__cell' });
     var $img = $('<img />', { 'class': 'shop-cart-list__img', 'src': product.image_url });

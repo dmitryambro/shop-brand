@@ -10,7 +10,6 @@
         <div class="shop-cart-list__cell shop-cart-list__header-cell">product details</div>
         <div class="shop-cart-list__cell shop-cart-list__header-cell">unite price</div>
         <div class="shop-cart-list__cell shop-cart-list__header-cell">quantity</div>
-        <div class="shop-cart-list__cell shop-cart-list__header-cell">shipping</div>
         <div class="shop-cart-list__cell shop-cart-list__header-cell">subtotal</div>
         <div class="shop-cart-list__cell shop-cart-list__header-cell">action</div>
     </div>

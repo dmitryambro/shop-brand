@@ -39,7 +39,7 @@
         </section>
         <footer class="products__footer">
             <?php for ($page = 1; $page <= $this->params['pages']; $page++) : ?>
-                <a href="<?=$this->params['page_link']?><?=$page?>" class="products__button products__button_page"><?=$page?></a>
+                <a href="<?=$this->params['page_link']?><?=$page?>" class="products__button products__button_page<?=($page == $this->params['page_now'] ? ' products__button_page-active' : '')?>"><?=$page?></a>
             <?php endfor; ?>
         </footer>
     </div>

@@ -15,9 +15,9 @@
 
 @keyframes drop-down-menu {
   0% {
-    height: 0; }
+    height: auto; }
   100% {
-    height: 320px; } }
+    height: auto; } }
 
 @keyframes rotate-scale-up {
   0% {
@@ -135,7 +135,6 @@ header {
 
 .header__button-acc {
   border: 0;
-  cursor: pointer;
   border-radius: 3px;
   background-color: #f16d7f;
   height: 38px;

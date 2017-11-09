@@ -37,7 +37,7 @@ class ProductsController extends Controller {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         if ($page < 1) $page = 1;
 
-        $like = '`name` LIKE "%' . $searchText . '%" OR `description` LIKE "%' . $searchText . '%"';
+        $like = '`product`.`name` LIKE "%' . $searchText . '%" OR `product`.`description` LIKE "%' . $searchText . '%"';
 
         $limit = 8;
 
@@ -53,7 +53,7 @@ class ProductsController extends Controller {
         } else if (count($selectCategories) > 0 && count($selectSubCategories) == 0) {
             $sqlCategories = array();
             foreach ($selectCategories as $category) {
-                array_push($sqlCategories, '`category_id` = ' . $category);
+                array_push($sqlCategories, '`product`.`category_id` = ' . $category);
             }
             $viewProductsList = $products->getFilterByCategories($sqlCategories, $like, $page, $limit);
             $sql = 'SELECT count(*) FROM `product` WHERE (' . implode(' OR ', $sqlCategories) . ') AND (' . $like . ')';
@@ -66,7 +66,7 @@ class ProductsController extends Controller {
         } else {
             $sqlSubCategories = array();
             foreach ($selectSubCategories as $subCategory) {
-                array_push($sqlSubCategories, '`sub_category_id` = ' . $subCategory);
+                array_push($sqlSubCategories, '`product`.`sub_category_id` = ' . $subCategory);
             }
             $viewProductsList = $products->getFilterBySubCategories($sqlSubCategories, $like, $page, $limit);
             $sql = 'SELECT count(*) FROM `product` WHERE (' . implode(' OR ', $sqlSubCategories) . ') AND (' . $like . ')';
@@ -88,6 +88,7 @@ class ProductsController extends Controller {
             'categories_list' => $categoriesList,
             'featured_products_list' => $viewProductsList,
             'pages' => $pages,
+            'page_now' => $page,
             'page_link' => $page_link
         ));
     }

@@ -18,7 +18,7 @@
         ?>
             <h1 class="display-3 border border-left-0 border-top-0 border-right-0"><span class="category_name" data-id="<?=$category_id?>"><?=$category_name?></span> <button type="button" class="btn btn-primary add_sub_category" data-id="<?=$category_id?>">Add sub category</button> <button type="button" class="btn btn-warning edit_category" data-id="<?=$category_id?>">Edit</button> <button type="button" class="btn btn-danger remove_category" data-id="<?=$category_id?>">Remove</button></h1>
             <?php foreach ($this->params['sub_categories'] as $sub_category) : ?>
-                <h1 class="display-4 border border-left-0 border-top-0 border-right-0"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <span class="sub_category_name" data-id="<?=$sub_category['id']?>"><?=$sub_category['name']?></span> <button type="button" class="btn btn-primary">View products</button> <button type="button" class="btn btn-warning edit_sub_category" data-id="<?=$sub_category['id']?>">Edit</button> <button type="button" class="btn btn-danger remove_sub_category" data-id="<?=$sub_category['id']?>">Remove</button></h1>
+                <h1 class="display-4 border border-left-0 border-top-0 border-right-0"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <span class="sub_category_name" data-id="<?=$sub_category['id']?>"><?=$sub_category['name']?></span> <button type="button" class="btn btn-warning edit_sub_category" data-id="<?=$sub_category['id']?>">Edit</button> <button type="button" class="btn btn-danger remove_sub_category" data-id="<?=$sub_category['id']?>">Remove</button></h1>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

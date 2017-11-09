@@ -234,7 +234,10 @@
       padding: 0 0 0 9px
     &:active
       animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
-      -webkit-animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
+    &_page-active
+      background-color: #eaeaea
+      color: #4a494a
+      animation: shadow-inset-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both
     &_page
       padding: 10px 14px
       &:after
@@ -430,7 +433,7 @@
     vertical-align: middle
     text-align: center
     &:nth-child(1)
-      width: 460px
+      width: 460px + 109px
       display: flex
     &:nth-child(2)
       width: 178px
@@ -439,7 +442,8 @@
     &:nth-child(4)
       width: 130px
     &:nth-child(5)
-      width: 163px
+      //width: 163px
+      width: 54px
     &:nth-child(6)
       width: 54px
   &__header-cell

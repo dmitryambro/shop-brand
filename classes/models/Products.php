@@ -6,6 +6,8 @@ use classes\base\App;
 
 
 class Products {
+    private $select = 'SELECT `product`.*, `category`.`name` as `category_name`, `sub_category`.`name` AS `sub_cateogry_name` FROM `product` LEFT JOIN `category` ON `product`.`category_id` = `category`.`id` LEFT JOIN `sub_category` ON `product`.`sub_category_id` = `sub_category`.`id`';
+
     public function add ($data) {
         $sql_names = array();
         $sql_values = array();
@@ -45,7 +47,7 @@ class Products {
     public function get ($limitOnPage, $page, $categoriesIds, $subCategoriesIds) {
         $start = $limitOnPage * ($page - 1);
         if (empty($subCategoriesIds)) {
-            $sql = 'SELECT * FROM `product` ORDER BY `add_tmst` DESC LIMIT ' . $limitOnPage . ' OFFSET ' . $start;
+            $sql = $this->select . ' ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limitOnPage . ' OFFSET ' . $start;
         } else {
             $subCategoriesIds = explode(',', $subCategoriesIds);
             $selectSubCategories = array();
@@ -53,7 +55,7 @@ class Products {
                 array_push($selectSubCategories, '`sub_category_id` = ' . $subCategoryId);
             }
             $selectSubCategories = implode(' OR ', $selectSubCategories);
-            $sql = 'SELECT * FROM `product` WHERE ' . $selectSubCategories . ' ORDER BY `add_tmst` DESC LIMIT ' . $limitOnPage . ' OFFSET ' . $start;
+            $sql = $this->select . ' WHERE ' . $selectSubCategories . ' ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limitOnPage . ' OFFSET ' . $start;
         }
         $pdo = APP::$app->db->pdo;
         try {
@@ -65,7 +67,7 @@ class Products {
     }
 
     public function getOne ($id) {
-        $sql = 'SELECT * FROM `product` WHERE `id` = '  . $id;
+        $sql = $this->select . ' WHERE `id` = '  . $id;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);
@@ -81,10 +83,10 @@ class Products {
         $ids = explode(',', $ids);
         $sql_ids = array();
         foreach ($ids as $id) {
-            array_push($sql_ids, '`id` = ' . $id);
+            array_push($sql_ids, '`product`.`id` = ' . $id);
         }
         $sql_ids = implode(' OR ', $sql_ids);
-        $sql = 'SELECT * FROM `product` WHERE ' . $sql_ids;
+        $sql = $this->select . ' WHERE ' . $sql_ids;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);
@@ -108,7 +110,7 @@ class Products {
 
     public function getFilterByCategories ($sqlCategories, $like, $page, $limit) {
         $start = $limit * ($page - 1);
-        $sql = 'SELECT * FROM `product` WHERE (' . implode(' OR ', $sqlCategories) . ') AND (' . $like . ') ORDER BY `add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
+        $sql = $this->select . ' WHERE (' . implode(' OR ', $sqlCategories) . ') AND (' . $like . ') ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);
@@ -120,7 +122,7 @@ class Products {
 
     public function getFilterBySubCategories ($sqlSubCategories, $like, $page, $limit) {
         $start = $limit * ($page - 1);
-        $sql = 'SELECT * FROM `product` WHERE (' . implode(' OR ', $sqlSubCategories) . ') AND (' . $like . ') ORDER BY `add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
+        $sql = $this->select . ' WHERE (' . implode(' OR ', $sqlSubCategories) . ') AND (' . $like . ') ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);
@@ -132,7 +134,7 @@ class Products {
 
     public function getFeaturedProducts2 ($like, $page, $limit = 5) {
         $start = $limit * ($page - 1);
-        $sql = 'SELECT * FROM `product` WHERE ' . $like . ' ORDER BY `add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
+        $sql = $this->select . ' WHERE ' . $like . ' ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);
@@ -144,7 +146,7 @@ class Products {
 
     public function getFeaturedProducts ($page, $limit = 5) {
         $start = $limit * ($page - 1);
-        $sql = 'SELECT * FROM `product` ORDER BY `add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
+        $sql = $this->select . ' ORDER BY `product`.`add_tmst` DESC LIMIT ' . $limit . ' OFFSET ' . $start;
         $pdo = APP::$app->db->pdo;
         try {
             $rows = $pdo->query($sql);

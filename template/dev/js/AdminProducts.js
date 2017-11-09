@@ -536,6 +536,7 @@ Products.prototype.getAjaxPage = function (page, categoriesIds, subCategoriesIds
 };
 
 Products.prototype.renderPage = function () {
+    globalAlerts.clear();
     var page = hash.params.page;
     var categoriesIds = hash.params.categories;
     var subCategoriesIds = hash.params.sub_categories;
@@ -577,7 +578,7 @@ Products.prototype.renderProduct = function (product) {
 };
 
 Products.prototype.renderEmpty = function () {
-    this.$container.html('<h3>Empty list!</h3>');
+    globalAlerts.render('danger', '<strong>Empty list!</strong>')
 };
 
 Products.prototype.renderPagination = function (pages) {
@@ -603,13 +604,17 @@ function globalAlerts (idContainer) {
 }
 
 globalAlerts.prototype.render = function (type, content) {
-    this.$container.empty();
+    this.clear();
     var $alert = $('<div />', { 'class': 'alert alert-' + type + ' alert-dismissible fade show', 'role': 'alert' }).html(content);
     var $button = $('<button />', { 'type': 'button', 'class': 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' })
             .append($('<span />', { 'aria-hidden': 'true' }).html('&times;'));
     $alert.append($button);
     this.$container.html($alert);
     $(document).scrollTop(0);
+};
+
+globalAlerts.prototype.clear = function () {
+    this.$container.empty();
 };
 
 $(document).ready(function () {
