@@ -19,44 +19,26 @@
         <div class="shop-cart-footer-buttons__left">
             <button class="shop-cart-footer-buttons__button">clear shopping cart</button>
         </div>
-        <div class="shop-cart-footer-buttons__right">
-            <button class="shop-cart-footer-buttons__button">continue shopping</button>
-        </div>
     </div>
 </div>
 <div class="shop-delivery">
     <div class="shop-delivery__center center">
         <div class="address-form">
             <div class="shop-delivery__title">shipping address</div>
-            <div class="shop-delivery__select-container">
-                <select class="shop-delivery__select-container_select">
-                    <option value="">Bangladesh</option>
-                    <option value="">Bangladesh</option>
-                    <option value="">Bangladesh</option>
-                    <option value="">Bangladesh</option>
-                    <option value="">Bangladesh</option>
-                </select>
-            </div>
             <input placeholder="State" class="shop-delivery__input">
-            <input placeholder="Postcode / Zip" class="shop-delivery__input">
-            <button class="shop-delivery__button">get a quote</button>
+            <input placeholder="City" class="shop-delivery__input">
         </div>
-        <div class="coupon-form">
-            <div class="shop-delivery__title">coupon discount</div>
-            <div class="shop-delivery__info">Enter your coupon code if you have one</div>
-            <input placeholder="State" class="shop-delivery__input">
-            <button class="shop-delivery__button">get a quote</button>
+        <div class="address-form">
+            <div class="shop-delivery__title shop-delivery__title_empty"></div>
+            <input placeholder="Street / nr" class="shop-delivery__input">
+            <input placeholder="Postcode / Zip" class="shop-delivery__input">
         </div>
         <div class="shop-cart-total">
-            <div class="shop-cart-total__sub-total">
-                <div class="shop-cart-total__sub-total_text">sub total</div>
-                <div class="shop-cart-total__sub-total_price">$900</div>
-            </div>
             <div class="shop-cart-total__total">
-                <div class="shop-cart-total__total_text">global total</div>
-                <div class="shop-cart-total__total_price">$900</div>
+                <div class="shop-cart-total__total_text">total</div>
+                <div class="shop-cart-total__total_price"></div>
             </div>
-            <button class="shop-cart-total__button">proceed to checkout</button>
+            <button class="shop-cart-total__button">buy and pay</button>
         </div>
     </div>
 </div>

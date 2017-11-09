@@ -25,14 +25,41 @@ Cart.prototype.viewCount = function () {
         $cartCount.html(this.cartOffline.length).hide();
         return false;
     }
-    $cartCount.html(this.cartOffline.length).show();
+    var count = 0;
+    this.cartOffline.forEach(function (product) {
+        count+= Number(product.count);
+    });
+    $cartCount.html(count).show();
 };
 
 Cart.prototype.add = function (productId, price, count) {
-    this.cartOffline.push({
-        product_id: productId,
-        price: price,
-        count: count
+    var isIn = false;
+    this.cartOffline = this.cartOffline.map(function (product) {
+        if (product.product_id == productId) {
+            isIn = true;
+            product.price = price;
+            product.count = Number(product.count) + Number(count);
+        }
+        return product;
+    });
+    if (!isIn) {
+        this.cartOffline.push({
+            product_id: productId,
+            price: price,
+            count: count
+        });
+    }
+    this.save();
+    this.viewCount();
+};
+
+Cart.prototype.change = function (productId, price, count) {
+    this.cartOffline = this.cartOffline.map(function (product) {
+        if (product.product_id == productId) {
+            product.price = price;
+            product.count = count;
+        }
+        return product;
     });
     this.save();
     this.viewCount();
@@ -50,21 +77,35 @@ Cart.prototype.clear = function () {
     this.viewCount();
 };
 
-function CartRender (classContainer, classClearCart, cart) {
+function CartRender (classContainer, classClearCart, classTotalPrice, cart) {
     var self = this;
     this.cart = cart;
     this.classContainer = classContainer;
     this.classClearCart = classClearCart;
+    this.classTotalPrice = classTotalPrice;
+    this.products = {};
     this.$container = $('.' + this.classContainer);
     this.ajaxGet();
     this.$container.on('click', '.shop-cart-list__remove', function () {
         var id = $(this).attr('data-id');
         self.cart.remove(id);
         $(this).parent().parent().remove();
+        self.calcTotalPrice();
     });
     $(document).on('click', '.' + this.classClearCart, function () {
         self.emptyContainer();
         self.cart.clear();
+        self.calcTotalPrice();
+    });
+    $(document).on('keyup', '.input_product_count', function () {
+        var id = $(this).attr('data-id');
+        var count = $(this).val();
+        var price = Number(self.products[id].price);
+        var priceSum = price * count;
+        $('.price_sum_view[data-id=' + id + ']').html('$' + priceSum);
+        $('.shop-cart-list__remove[data-id=' + id + ']').attr('data-count', count);
+        self.cart.change(id, price, count);
+        self.calcTotalPrice();
     });
 }
 
@@ -92,15 +133,15 @@ CartRender.prototype.ajaxGet = function () {
                 console.log(json.message);
                 return false;
             }
-            var products = {};
+            this.products = {};
             for (var i = 0; i < json.products.length; i++) {
-                products[json.products[i].id] = json.products[i];
+                this.products[json.products[i].id] = json.products[i];
             }
             for (var i = 0; i < productsIds.length; i++) {
                 var id = productsIds[i];
-                this.$container.append(this.renderItem(products[id], productsCounts[id]));
+                this.$container.append(this.renderItem(this.products[id], productsCounts[id]));
             }
-
+            this.calcTotalPrice();
         },
         error: function () {}
     });
@@ -111,7 +152,6 @@ CartRender.prototype.emptyContainer = function () {
 };
 
 CartRender.prototype.renderItem = function (product, count) {
-    console.log(product);
     var $row = $('<div />', { 'class': 'shop-cart-list__row shop-cart-list__row_content' });
     var $cartCell1 = $('<div />', { 'class': 'shop-cart-list__cell' });
     var $img = $('<img />', { 'class': 'shop-cart-list__img', 'src': product.image_url });
@@ -122,12 +162,20 @@ CartRender.prototype.renderItem = function (product, count) {
     $details.append($detailsTitle).append($detailsColor).append($detailsSize);
     $cartCell1.append($img).append($details);
     var $cartCell2 = $('<div />', { 'class': 'shop-cart-list__cell shop-cart-list__content-cell' }).html('$' + product.price);
-    var $input = $('<input />', { 'class': 'shop-cart-list__number' }).val(count);
+    var $input = $('<input />', { 'class': 'shop-cart-list__number input_product_count', 'data-id': product.id }).val(count);
     var $cartCell3 = $('<div />', { 'class': 'shop-cart-list__cell shop-cart-list__content-cell' });
     $cartCell3.append($input);
-    var $cartCell4 = $('<div />', { 'class': 'shop-cart-list__cell shop-cart-list__content-cell' }).html('$' + ( Number(product.price) * count ));
+    var $cartCell4 = $('<div />', { 'class': 'shop-cart-list__cell shop-cart-list__content-cell price_sum_view', 'data-id': product.id }).html('$' + ( Number(product.price) * count ));
     var $cartCell5 = $('<div />', { 'class': 'shop-cart-list__cell shop-cart-list__content-cell' });
     var $remove = $('<div />', { 'class': 'shop-cart-list__remove', 'data-id': product.id, 'data-count': count });
     $cartCell5.append($remove);
     return $row.append($cartCell1).append($cartCell2).append($cartCell3).append($cartCell4).append($cartCell5);
+};
+
+CartRender.prototype.calcTotalPrice = function () {
+    var totalPrice = 0;
+    this.cart.cartOffline.forEach(function (product) {
+        totalPrice+= Number(product.price) * Number(product.count);
+    });
+    $('.' + this.classTotalPrice).text('$' + totalPrice);
 };

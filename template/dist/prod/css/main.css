@@ -700,6 +700,8 @@
   line-height: 16px;
   text-transform: uppercase;
   margin-bottom: 2px; }
+  .shop-delivery__title_empty {
+    height: 16px; }
 
 .shop-delivery__info {
   color: #000000;
@@ -731,7 +733,7 @@
   padding: 16px 18px;
   font-size: 13px;
   font-weight: 300;
-  color: #b1b1b1; }
+  color: #222222; }
   .shop-delivery__input::-webkit-input-placeholder {
     color: #b1b1b1; }
   .shop-delivery__input:-ms-input-placeholder {
